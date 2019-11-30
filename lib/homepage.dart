@@ -17,6 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 0,
           actions: <Widget>[
             IconButton(
+              onPressed: () {},
               icon: Icon(Icons.search,
                 color: Colors.black,),
             )
