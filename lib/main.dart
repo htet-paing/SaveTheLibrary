@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_library/drawerpage/librariespage.dart';
-import 'package:save_the_library/drawerpage/newpage.dart';
-import 'package:save_the_library/homepage.dart';
+import 'package:save_the_library/pages/library_page.dart';
+import 'package:save_the_library/pages/news_page.dart';
+import 'package:save_the_library/home_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,10 +15,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
-      routes: <String,WidgetBuilder>{
+      routes: <String, WidgetBuilder>{
         "/newspage": (BuildContext context) => NewsPage(),
         "/librariespage": (BuildContext context) => LibrariesPage(),
-
       },
     );
   }

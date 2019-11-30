@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NewsPage extends StatefulWidget {
+class LibrariesPage extends StatefulWidget {
   @override
-  _NewsPageState createState() => _NewsPageState();
+  _LibrariesPageState createState() => _LibrariesPageState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class _LibrariesPageState extends State<LibrariesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +13,10 @@ class _NewsPageState extends State<NewsPage> {
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text('News',style: TextStyle(
-            color: Colors.black
-        ),),
+        title: Text(
+          'Libraries',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Center(
         child: Text('News Page'),
