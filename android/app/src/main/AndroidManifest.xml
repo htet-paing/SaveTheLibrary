@@ -9,7 +9,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="save_the_library"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/stl_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
