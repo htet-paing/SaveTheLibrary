@@ -17,19 +17,21 @@ class NewsDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('News Detail'),
       ),
-      body: FutureBuilder<Response<BuiltNewsDetail>>(
-        future: Provider.of<ApiService>(context).getNewsDetail(this.newsId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Center(
-              child: Text(snapshot.data.body.postTitle),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+      body: NoConnectionHandler(
+        child: FutureBuilder<Response<BuiltNewsDetail>>(
+          future: Provider.of<ApiService>(context).getNewsDetail(this.newsId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Center(
+                child: Text(snapshot.data.body.postTitle),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

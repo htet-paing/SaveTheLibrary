@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:save_the_library/connectivity_state.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/intro_slider_page.dart';
 import 'package:save_the_library/pages/library_page.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         Provider<ApiService>(
           builder: (_) => ApiService.create(),
           dispose: (_, apiService) => apiService.dispose(),
+        ),
+        ChangeNotifierProvider(
+          builder: (_) => ConnectivityState(),
         )
       ],
       child: MaterialApp(

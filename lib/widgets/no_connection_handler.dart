@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:save_the_library/connectivity_state.dart';
 
 /// Show _offlineWidget_ when there is no connection.
 ///
@@ -23,45 +25,23 @@ class NoConnectionHandler extends StatefulWidget {
 }
 
 class _NoConnectionHandlerState extends State<NoConnectionHandler> {
-  StreamSubscription<ConnectivityResult> _connectivitySub;
-  WidgetStatus _widgetStatus;
-
-  @override
-  void initState() {
-    super.initState();
-    _connectivitySub = Connectivity().onConnectivityChanged.listen(
-      (ConnectivityResult result) {
-        if (this._widgetStatus == WidgetStatus.idle) {
-          this.setState(() {}); // rebuild widget
-        }
-      },
-    );
-  }
+  WidgetStatus _widgetStatus = WidgetStatus.idle;
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ConnectivityResult>(
-      future: Connectivity().checkConnectivity(),
-      builder: (_, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data == ConnectivityResult.none) {
-            this._widgetStatus = WidgetStatus.idle; // <-
-            return this.widget.offlineWidget;
-          } else {
-            this._widgetStatus = WidgetStatus.busy; // <-
-            return this.widget.child;
-          }
+    return Consumer<ConnectivityState>(
+      builder: (_, connectivityState, __) {
+        if (connectivityState.state == ConnectivityResult.none &&
+            this._widgetStatus == WidgetStatus.idle) {
+          // show offlineWidget only when the widget is idle
+          this._widgetStatus = WidgetStatus.idle;
+          return this.widget.offlineWidget;
         } else {
+          this._widgetStatus = WidgetStatus.busy;
           return this.widget.child;
         }
       },
     );
-  }
-
-  @override
-  void dispose() {
-    this._connectivitySub.cancel();
-    super.dispose();
   }
 }
 
@@ -88,4 +68,4 @@ class NoConnectionWidget extends StatelessWidget {
   }
 }
 
-enum WidgetStatus { idle, busy }
+enum WidgetStatus { busy, idle }
