@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Future<SharedPreferences> _getSliderState() async {
     final pref = await SharedPreferences.getInstance();
 
-    pref.get('sliderState') ?? pref.setBool('sliderState', true);
+    await pref.get('sliderState') ?? await pref.setBool('sliderState', true);
     return pref;
   }
 
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+
         home: FutureBuilder<SharedPreferences>(
           future: _getSliderState(),
           builder: (context, snapshot) {
@@ -42,10 +43,11 @@ class MyApp extends StatelessWidget {
                 return MyHomePage();
               }
             } else {
-              return Text(snapshot.error.toString());
+              return Container();
             }
           },
         ),
+
         routes: <String, WidgetBuilder>{
           "/homepage": (BuildContext context) => MyHomePage(),
           "/newspage": (BuildContext context) => NewsPage(),
