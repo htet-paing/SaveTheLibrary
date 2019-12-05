@@ -4,20 +4,79 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
 
-/// [T] is type of Response's body
-
 typedef List<dynamic> ListGetter<T>(T body);
-typedef Widget ItemBuilder<T>(BuildContext context, T item);
-
+typedef Widget ItemBuilder(BuildContext context, dynamic item);
 typedef Future<Response<T>> OnGet<T>(int page);
 
+/// [SmartList] provide _pull to refresh_, _pagination_, and other additional features out-of-the-box with few configuration
+///
+/// _T_ is type of Response's body return on get method
+///
 class SmartList<T> extends StatefulWidget {
+  /// [onGet] will pass _page_ parameter. use that _page_ inside api get method.
+  ///
+  /// i.e: need to return the type of Future<Response<_SmartList Type_>>
+  ///
+  /// eg:
+  /// ```dart
+  /// SmartList<BuiltBookList> {
+  ///   onGet: (int page) => Provider.of<ApiService>(context).getBooks(page);
+  ///   // should return Future<Response<BuiltBookList>>
+  /// }
+  ///
+  /// SmartList<BuiltLibraryList> {
+  ///   onGet: (int page) => Provider.of<ApiService>(context).getLibraries(page);
+  ///   // should return Future<Response<BuiltLibraryList>>
+  /// }
+  /// ```
   final OnGet<T> onGet;
 
-  /// [listGetter] generate list of item which is used in the [itemBuilder] to build widget
+  /// [listGetter] will pass _body_ ( of Response ).
+  ///
+  /// From that _body_ return a list of item to use in [itemBuilder]
+  ///
+  /// eg:
+  /// ```dart
+  /// SmartList<BuiltBookList> {
+  ///   onGet: (int page) => Provider.of<ApiService>(context).getBooks(page);
+  ///   listGetter: (BuiltLibrariesList body) => body.data.toList();
+  /// }
+  ///
+  /// SmartList<BuiltLibraryList> {
+  ///   onGet: (int page) => Provider.of<ApiService>(context).getLibraries(page);
+  ///   listGetter: (BuiltLibraryList body) => body.data.toList();
+  /// }
+  /// ```
   final ListGetter<T> listGetter;
+
+  /// [itemBuilder] will pass _context_ and dynamic _item_ ( from _listGetter_ ) for building item widget.
+  ///
+  /// eg:
+  /// ```dart
+  /// SmartList<BuiltBookList> {
+  ///   ...
+  ///   listGetter: (BuiltLibrariesList body) => body.data.toList();
+  ///   itemBuilder: (context, dynamic item) {
+  ///     BuiltBook book = item as BuiltBook; // for typesafe
+  ///     return Text(book.bookTitle);
+  ///   }
+  /// }
+  ///
+  /// SmartList<BuiltLibraryList> {
+  ///   ...
+  ///   listGetter: (BuiltLibraryList body) => body.data.toList();
+  ///   itemBuilder: (context, dynamic item) {
+  ///     BuiltLibrary library = item as BuiltLibrary; // for typesafe
+  ///     return Text(library.name);
+  ///   }
+  /// }
+  /// ```
   final ItemBuilder itemBuilder;
+
+  /// _true_ by default
   final bool enablePullUp;
+
+  /// _true_ by default
   final bool enablePullDown;
 
   SmartList({
@@ -33,22 +92,16 @@ class SmartList<T> extends StatefulWidget {
   _SmartListState createState() => _SmartListState<T>(
         this.onGet,
         this.listGetter,
-        this.enablePullUp,
-        this.enablePullDown,
       );
 }
 
 class _SmartListState<T> extends State<SmartList> {
   OnGet<T> _onGet;
   ListGetter<T> _listGetter;
-  bool _enablePullUp;
-  bool _enablePullDown;
 
   _SmartListState(
     this._onGet,
     this._listGetter,
-    this._enablePullUp,
-    this._enablePullDown,
   );
 
   RefreshController _refreshController;
@@ -86,8 +139,8 @@ class _SmartListState<T> extends State<SmartList> {
       children: <Widget>[
         SmartRefresher(
           controller: _refreshController,
-          enablePullUp: this._enablePullUp,
-          enablePullDown: this._enablePullDown,
+          enablePullUp: this.widget.enablePullUp,
+          enablePullDown: this.widget.enablePullDown,
           header: MaterialClassicHeader(),
           footer: ClassicFooter(),
           physics: BouncingScrollPhysics(),

@@ -3,15 +3,18 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+/// Show _offlineWidget_ when there is no connection.
+///
+/// When the device is online again [NoConnectionHandler] auto replace the _offlineWidget_ with its _child_
 class NoConnectionHandler extends StatefulWidget {
-  final Widget reloadPage;
+  /// widget to display when offline ( default one is provided)
+  final Widget offlineWidget;
   final Widget child;
 
   NoConnectionHandler({
     Key key,
-    this.reloadPage = const NoConnectionWidget(),
+    this.offlineWidget = const NoConnectionWidget(),
     @required this.child,
   }) : super(key: key);
 
@@ -43,7 +46,7 @@ class _NoConnectionHandlerState extends State<NoConnectionHandler> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == ConnectivityResult.none) {
             this._widgetStatus = WidgetStatus.idle; // <-
-            return this.widget.reloadPage;
+            return this.widget.offlineWidget;
           } else {
             this._widgetStatus = WidgetStatus.busy; // <-
             return this.widget.child;
