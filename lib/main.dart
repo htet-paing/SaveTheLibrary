@@ -4,7 +4,7 @@ import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/intro_slider_page.dart';
 import 'package:save_the_library/pages/library_page.dart';
 import 'package:save_the_library/pages/news_page.dart';
-import 'package:save_the_library/home_page.dart';
+import 'package:save_the_library/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-
         home: FutureBuilder<SharedPreferences>(
           future: _getSliderState(),
           builder: (context, snapshot) {
@@ -47,7 +46,6 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-
         routes: <String, WidgetBuilder>{
           "/homepage": (BuildContext context) => MyHomePage(),
           "/newspage": (BuildContext context) => NewsPage(),

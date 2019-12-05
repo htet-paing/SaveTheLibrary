@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:save_the_library/home_page.dart';
 
 class MyIntroSlider extends StatefulWidget {
   MyIntroSlider({Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MyIntroSliderState();
-
-
 }
 
 class MyIntroSliderState extends State<MyIntroSlider> {
@@ -19,22 +16,21 @@ class MyIntroSliderState extends State<MyIntroSlider> {
   Function goToTab;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
 
-    slides.add(
-      Slide(
-        title: "School",
-        styleTitle: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20.0,
-        ),
-        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-        styleDescription: TextStyle(
-          color: Colors.blueAccent,
-        ),
-      )
-    );
+    slides.add(Slide(
+      title: "School",
+      styleTitle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20.0,
+      ),
+      description:
+          "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+      styleDescription: TextStyle(
+        color: Colors.blueAccent,
+      ),
+    ));
 
     slides.add(
       Slide(
@@ -43,7 +39,8 @@ class MyIntroSliderState extends State<MyIntroSlider> {
           fontWeight: FontWeight.bold,
           fontSize: 20.0,
         ),
-        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
         styleDescription: TextStyle(
           color: Colors.blueAccent,
         ),
@@ -57,7 +54,8 @@ class MyIntroSliderState extends State<MyIntroSlider> {
           fontWeight: FontWeight.bold,
           fontSize: 20.0,
         ),
-        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
         styleDescription: TextStyle(
           color: Colors.blueAccent,
         ),
@@ -179,6 +177,4 @@ class MyIntroSliderState extends State<MyIntroSlider> {
       onTabChangeCompleted: this.onTabChangeCompleted,
     );
   }
-      
-        
 }
