@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.collections_bookmark, 'Libraries', '/librariespage'),
           buildDrawerItem(Icons.book, 'Books', '/books'),
           buildDrawerItem(Icons.cloud_download, 'Resources Center'),
-          buildDrawerItem(Icons.video_library, 'Videos List'),
+          buildDrawerItem(Icons.video_library, 'Videos List','/videospage'),
           Divider(
             color: Colors.black26,
           ),

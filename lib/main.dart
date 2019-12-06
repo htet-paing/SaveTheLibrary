@@ -6,11 +6,13 @@ import 'package:save_the_library/pages/intro_slider_page.dart';
 import 'package:save_the_library/pages/library_page.dart';
 import 'package:save_the_library/pages/news_page.dart';
 import 'package:save_the_library/pages/home_page.dart';
+import 'package:save_the_library/pages/videos_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   Future<SharedPreferences> _getSliderState() async {
     final pref = await SharedPreferences.getInstance();
 
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
           "/homepage": (BuildContext context) => MyHomePage(),
           "/newspage": (BuildContext context) => NewsPage(),
           "/librariespage": (BuildContext context) => LibrariesPage(),
+          "/videospage" : (BuildContext context) => VideosPage(),
+
         },
       ),
     );
