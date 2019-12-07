@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyIntroSlider extends StatefulWidget {
   MyIntroSlider({Key key}) : super(key: key);
@@ -63,8 +64,10 @@ class MyIntroSliderState extends State<MyIntroSlider> {
     );
   }
 
-  void onDonePress() {
-    // Back to the first tab
+  void onDonePress() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('sliderState', false);
+
     Navigator.pushNamed(context, '/home');
   }
 

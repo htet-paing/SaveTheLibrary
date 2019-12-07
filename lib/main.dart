@@ -8,6 +8,7 @@ import 'package:save_the_library/pages/home/home_page.dart';
 import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
 import 'package:save_the_library/pages/videos/videos_page.dart';
 import 'package:save_the_library/theme/style.dart';
+import 'package:save_the_library/network/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/connectivity_state.dart';
