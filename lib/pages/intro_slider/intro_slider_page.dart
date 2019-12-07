@@ -65,7 +65,7 @@ class MyIntroSliderState extends State<MyIntroSlider> {
 
   void onDonePress() {
     // Back to the first tab
-    Navigator.pushNamed(context, '/homepage');
+    Navigator.pushNamed(context, '/home');
   }
 
   void onTabChangeCompleted(index) {

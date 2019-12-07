@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/connectivity_state.dart';
-import 'package:save_the_library/network/api_service.dart';
-import 'package:save_the_library/pages/intro_slider_page.dart';
-import 'package:save_the_library/pages/library_page.dart';
-import 'package:save_the_library/pages/news_page.dart';
-import 'package:save_the_library/pages/home_page.dart';
+import 'package:save_the_library/pages/books/books_page.dart';
+import 'package:save_the_library/pages/intro_slider/intro_slider_page.dart';
+import 'package:save_the_library/pages/library/library_page.dart';
+import 'package:save_the_library/pages/news/news_page.dart';
+import 'package:save_the_library/pages/home/home_page.dart';
+import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
+import 'package:save_the_library/pages/videos/videos_page.dart';
+import 'package:save_the_library/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'models/connectivity_state.dart';
+import 'network/api_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,9 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: appTheme(),
         home: FutureBuilder<SharedPreferences>(
           future: _getSliderState(),
           builder: (context, snapshot) {
@@ -51,9 +54,12 @@ class MyApp extends StatelessWidget {
           },
         ),
         routes: <String, WidgetBuilder>{
-          "/homepage": (BuildContext context) => MyHomePage(),
-          "/newspage": (BuildContext context) => NewsPage(),
-          "/librariespage": (BuildContext context) => LibrariesPage(),
+          "/home": (BuildContext context) => MyHomePage(),
+          "/news": (BuildContext context) => NewsPage(),
+          "/libraries": (BuildContext context) => LibrariesPage(),
+          "/books": (context) => BooksPage(),
+          "/resources": (context) => ResourceCenterPage(),
+          "/videos": (context) => VideosPage(),
         },
       ),
     );

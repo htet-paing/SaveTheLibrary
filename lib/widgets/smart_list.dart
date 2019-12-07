@@ -119,7 +119,8 @@ class _SmartListState<T> extends State<SmartList> {
 
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.offset > 0.0) {
+      if (_scrollController.offset > 1000) {
+        print(_scrollController.offset);
         setState(() {
           _floatingButtonOpticity = 1.0;
         });
@@ -159,6 +160,8 @@ class _SmartListState<T> extends State<SmartList> {
             alignment: Alignment(0.8, 0.9),
             child: AnimatedOpacity(
               child: FloatingActionButton(
+                heroTag: typeOf<
+                    T>(), // need if there are two floating action bottom in the same screen
                 onPressed: () {
                   _scrollController.animateTo(
                     0.0,

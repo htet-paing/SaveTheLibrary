@@ -4,11 +4,11 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/connectivity_state.dart';
+import 'package:save_the_library/models/connectivity_state.dart';
 
 /// Show _offlineWidget_ when there is no connection.
 ///
-/// When the device is online again [NoConnectionHandler] auto replace the _offlineWidget_ with its _child_
+/// When the device is online again [NoConnectionHandler] auto replace the _offlineWidget_ with its _child_.
 class NoConnectionHandler extends StatefulWidget {
   /// widget to display when offline ( default one is provided)
   final Widget offlineWidget;
@@ -45,6 +45,7 @@ class _NoConnectionHandlerState extends State<NoConnectionHandler> {
   }
 }
 
+/// default offline page for _NoConnectionHandler_
 class NoConnectionWidget extends StatelessWidget {
   const NoConnectionWidget({Key key}) : super(key: key);
 

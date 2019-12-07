@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:save_the_library/models/connectivity_state.dart';
+import 'package:save_the_library/network/api_service.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -24,12 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => {},
               )
             ],
-            title: Text('Save the Library',
-                style: TextStyle(
-                  color: Color(
-                    0xFFF9A825,
-                  ),
-                )),
+            title: Text('Save the Library'),
             centerTitle: true,
           ),
           drawer: buildDrawer()),
@@ -55,22 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(color: Colors.white),
           ),
           buildSubtitle('Categories'),
-          buildDrawerItem(Icons.library_books, 'News', '/newspage'),
+          buildDrawerItem(Icons.library_books, 'News', '/news'),
           buildDrawerItem(
-              Icons.collections_bookmark, 'Libraries', '/librariespage'),
+              Icons.collections_bookmark, 'Libraries', '/libraries'),
           buildDrawerItem(Icons.book, 'Books', '/books'),
-          buildDrawerItem(Icons.cloud_download, 'Resources Center'),
-          buildDrawerItem(Icons.video_library, 'Videos List'),
-          Divider(
-            color: Colors.black26,
-          ),
+          buildDrawerItem(
+              Icons.cloud_download, 'Resources Center', '/resources'),
+          buildDrawerItem(Icons.video_library, 'Videos List', '/videos'),
+          Divider(),
           buildSubtitle('About Application'),
           buildDrawerItem(Icons.info, 'About Us', '/about'),
           buildDrawerItem(Icons.mail, 'Contact Us', '/contact'),
           buildDrawerItem(Icons.developer_mode, 'Developers', '/developer'),
-          Divider(
-            color: Colors.black26,
-          ),
+          Divider(),
           buildSubtitle('Communicate'),
           buildDrawerItem(Icons.share, 'Share'),
           buildDrawerItem(Icons.send, 'Send')
