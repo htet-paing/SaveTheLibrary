@@ -184,11 +184,13 @@ class _SmartListState<T> extends State<SmartList> {
     try {
       Response<T> response = await this._onGet(1);
       if (response.statusCode == 200) {
-        setState(() {
-          _itemList = this._listGetter(response.body);
-          _currentPage = 1;
-          _refreshController.refreshCompleted();
-        });
+        if (this.mounted) {
+          setState(() {
+            _itemList = this._listGetter(response.body);
+            _currentPage = 1;
+            _refreshController.refreshCompleted();
+          });
+        }
       } else {
         _refreshController.refreshFailed();
       }
@@ -212,11 +214,13 @@ class _SmartListState<T> extends State<SmartList> {
     try {
       Response<T> response = await this._onGet(_currentPage + 1);
       if (response.statusCode == 200) {
-        setState(() {
-          _itemList.addAll(this._listGetter(response.body));
-          _currentPage++;
-          _refreshController.loadComplete();
-        });
+        if (this.mounted) {
+          setState(() {
+            _itemList.addAll(this._listGetter(response.body));
+            _currentPage++;
+            _refreshController.loadComplete();
+          });
+        }
       } else {
         _refreshController.loadFailed();
       }
