@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
           buildDrawerItem(
               Icons.collections_bookmark, 'Libraries', '/libraries'),
           buildDrawerItem(Icons.book, 'Books', '/books'),
+          buildDrawerItem(Icons.map, 'Map', '/map'),
           buildDrawerItem(
               Icons.cloud_download, 'Resources Center', '/resources'),
           buildDrawerItem(Icons.video_library, 'Videos List', '/videos'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:save_the_library/maps/google.dart';
 import 'package:save_the_library/pages/books/books_page.dart';
 import 'package:save_the_library/pages/intro_slider/intro_slider_page.dart';
 import 'package:save_the_library/pages/library/library_page.dart';
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
           "/books": (context) => BooksPage(),
           "/resources": (context) => ResourceCenterPage(),
           "/videos": (context) => VideosPage(),
+          "/map": (BuildContext context) => PointApp(),
         },
       ),
     );

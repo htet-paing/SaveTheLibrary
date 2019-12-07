@@ -10,6 +10,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="save_the_library"
         android:icon="@mipmap/stl_logo">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAusmB1sKR_YCv0NTHQIBQS8PasUpgASGo"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
