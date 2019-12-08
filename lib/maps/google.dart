@@ -32,7 +32,7 @@ class PointAppState extends State<PointApp> {
                MaterialPageRoute(builder: (context) => MyHomePage()),
              );
           },),
-        title: Text("Yangon Divisions"),
+        title: Text("Tamwe Library"),
         actions: <Widget>[
           IconButton(
               icon: Icon(FontAwesomeIcons.search),
@@ -42,18 +42,15 @@ class PointAppState extends State<PointApp> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.only(
-          top: 50.0,
-          bottom: 70.0,
-        ),
+        padding: EdgeInsets.only(top: 50.0, bottom: 77.0),
         child: Stack(
-          children: <Widget>[
-            _buildGoogleMap(context),
-            _zoominusfunction(),
-            _zoomplusfunction(),
-            _buildContainer(),
-          ],
-        ),
+            children: <Widget>[
+              _buildGoogleMap(context),
+              _zoominusfunction(),
+              _zoomplusfunction(),
+              _buildContainer(),
+            ],
+          ),
       ),
     );
   }
@@ -104,22 +101,43 @@ class PointAppState extends State<PointApp> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://savethelibrarymyanmar.org/media/83/conversions/feature_image.jpg",
+                  "https://savethelibrarymyanmar.org/media/1474/conversions/feature_image.jpg",
                   16.8102, 96.1765, "BEPS-22 Tarmwe Library"),
             ),
             SizedBox(width: 10.0),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://lh5.googleusercontent.com/p/AF1QipMKRN-1zTYMUVPrH-CcKzfTo6Nai7wdL7D8PMkt=w340-h160-k-no",
-                  16.7984618, 96.1490159, "Shwe Dagon Pagoda"),
+                  "https://savethelibrarymyanmar.org/media/83/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "Kyauk Myaung Yap Sar Phat A Thin"),
             ),
             SizedBox(width: 10.0),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://images.unsplash.com/photo-1504940892017-d23b9053d5d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-                  16.7783961,96.1532603, "BoGyoke Zay"),
+                  "https://savethelibrarymyanmar.org/media/1178/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "School Libraries"),
+            ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://savethelibrarymyanmar.org/media/2310/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "Sar Nar Yat Woon"),
+            ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://savethelibrarymyanmar.org/media/676/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "Sar Pay Law Ka News"),
+            ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://savethelibrarymyanmar.org/media/173/conversions/feature_image.jpg",
+                  16.47000000, 96.10000000, "BaGyii Home Movement Library"),
             ),
           ],
         ),
@@ -127,7 +145,7 @@ class PointAppState extends State<PointApp> {
     );
   }
   // box wid get goes h3r3
-  Widget _boxes(String _image, double lat,double long,String pagodaName) {
+  Widget _boxes(String _image, double lat,double long,String libraryName) {
     return GestureDetector(
       onTap: () {
         _gotoLocation(lat,long);
@@ -156,7 +174,7 @@ class PointAppState extends State<PointApp> {
                 Container(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: myDetailsContainer1(pagodaName),
+                    child: myDetailsContainer1(libraryName),
                   ),
                 ),
               ],
@@ -167,14 +185,14 @@ class PointAppState extends State<PointApp> {
     );
   }
 
-  Widget myDetailsContainer1(String pagodaName) {
+  Widget myDetailsContainer1(String libraryName) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Container(
-              child: Text(pagodaName,
+              child: Text(libraryName,
                 style: TextStyle(
                     color: Color(0xff6200ee),
                     fontSize: 24.0,
@@ -276,12 +294,12 @@ class PointAppState extends State<PointApp> {
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(target: LatLng(16.9284, 96.2346), zoom: 12),
+        initialCameraPosition: CameraPosition(target: LatLng(16.8092588, 96.1593468), zoom: 16),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
         markers: {
-          ygn1Marker,ygn2Marker,ygn3Marker,gramercyMarker,myitTarNyuntMarker,blueMarker
+          ygn1Marker,ygn2Marker,ygn3Marker,developerMarker,myitTarNyuntMarker,blueMarker
         },
       ),
     );
@@ -294,8 +312,8 @@ class PointAppState extends State<PointApp> {
   }
 }
 
-Marker gramercyMarker = Marker(
-  markerId: MarkerId('gramercy'),
+Marker developerMarker = Marker(
+  markerId: MarkerId('developer'),
   position: LatLng(16.9284, 96.2346),
   infoWindow: InfoWindow(title: 'East Dagon'),
   icon: BitmapDescriptor.defaultMarkerWithHue(
