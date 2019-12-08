@@ -41,6 +41,21 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Save the Library'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Colors.white,
+                Colors.grey
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Center(
         child: YoutubePlayer(
           controller: _controller,
