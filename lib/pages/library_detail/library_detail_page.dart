@@ -7,7 +7,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/library/library.dart';
 import 'package:save_the_library/network/api_service.dart';
-import 'package:save_the_library/pages/library_detail/components/library_detail_body.dart';
+import 'package:save_the_library/pages/animationIndicator/loader.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 
 class LibraryDetailPage extends StatelessWidget {
@@ -17,8 +17,9 @@ class LibraryDetailPage extends StatelessWidget {
   final String libraryDescription;
   final String libraryLatitute;
   final String libraryLongitude;
+  final String libraryvillageTractName;
 
-  const LibraryDetailPage({Key key, @required this.libraryId, this.libraryLatitute, this.libraryLongitude, this.libraryImage, this.libraryName, this.libraryDescription}) : super(key: key);
+  const LibraryDetailPage({Key key, @required this.libraryId, this.libraryvillageTractName, this.libraryLatitute, this.libraryLongitude, this.libraryImage, this.libraryName, this.libraryDescription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class LibraryDetailPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
         title: Text(
-          'Library Detail',
+          "Library Detail",
           style: TextStyle(color: Colors.black87),
         ),
         backgroundColor: Colors.white,
@@ -106,7 +107,7 @@ class LibraryDetailPage extends StatelessWidget {
                   children: <Widget>[
                     Html(
                       padding: EdgeInsets.all(05.0),
-                      data: "${snapshot.data.body.phone}",
+                      data: "${snapshot.data.body.villageTractName}",
                       customTextAlign: (dom.Node node) {
                         if (node is dom.Element) {
                           switch (node.localName) {
@@ -127,12 +128,12 @@ class LibraryDetailPage extends StatelessWidget {
                       },
                     ),
                   ],
-                ),),
-              ],
-              );
+                ),
+              )],
+            );
             
             } else {
-              return Center(child: CircularProgressIndicator(),
+              return Center(child: LoaderTwo(), //Loader of the pages animation func here
               );
             }
           },
@@ -140,4 +141,5 @@ class LibraryDetailPage extends StatelessWidget {
       ),
     );
   }
+  
 }
