@@ -12,9 +12,10 @@ class NewsDetailPage extends StatefulWidget {
   final int newsId;
   final String newsContent;
   final String newsImage;
+  final String authorName;
 
   const NewsDetailPage(
-      {Key key, @required this.newsId, this.newsContent, this.newsImage})
+      {Key key, @required this.newsId, this.newsContent, this.newsImage, this.authorName})
       : super(key: key);
 
   @override
@@ -32,6 +33,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
         child: FutureBuilder<Response<BuiltNewsDetail>>(
           future: Provider.of<ApiService>(context)
               .getNewsDetail(this.widget.newsId),
+              
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Column(children: <Widget>[

@@ -21,6 +21,7 @@ class NewsPage extends StatelessWidget {
         title: Text('News'),
       ),
       body: NewsList(),
+      
     );
   }
 }

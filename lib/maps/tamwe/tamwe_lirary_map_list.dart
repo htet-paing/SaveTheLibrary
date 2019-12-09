@@ -6,12 +6,12 @@ import 'package:save_the_library/pages/home/home_page.dart';
 
 import 'package:save_the_library/main.dart';
 
-class PointApp extends StatefulWidget {
+class TamwePointApp extends StatefulWidget {
   @override
-  PointAppState createState() => PointAppState();
+  TamwePointAppState createState() => TamwePointAppState();
 }
 
-class PointAppState extends State<PointApp> {
+class TamwePointAppState extends State<TamwePointApp> {
   Completer<GoogleMapController> _controller = Completer();
 
   @override
@@ -87,6 +87,7 @@ class PointAppState extends State<PointApp> {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(16.9101878, 96.0118898), zoom: zoomVal)));
   }
+  // Tamwe Library Card list here
   // this method create Width of Slider Widget
   Widget _buildContainer() {
     return Align(
@@ -139,6 +140,20 @@ class PointAppState extends State<PointApp> {
                   "https://savethelibrarymyanmar.org/media/173/conversions/feature_image.jpg",
                   16.47000000, 96.10000000, "BaGyii Home Movement Library"),
             ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://savethelibrarymyanmar.org/media/1203/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "Myit Tar Nyunt Library"),
+            ),
+            SizedBox(width: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _boxes(
+                  "https://savethelibrarymyanmar.org/media/418/conversions/feature_image.jpg",
+                  16.8102, 96.1765, "Arr Man Thit Library"),
+            ),
           ],
         ),
       ),
@@ -167,13 +182,13 @@ class PointAppState extends State<PointApp> {
                     borderRadius: new BorderRadius.circular(24.0),
                     child: Image(
                       fit: BoxFit.fill,
-                      image: NetworkImage(_image),
+                      image: NetworkImage(_image),                 
                     ),
                   ),
                 ),
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(9.0),
                     child: myDetailsContainer1(libraryName),
                   ),
                 ),
@@ -194,7 +209,7 @@ class PointAppState extends State<PointApp> {
           child: Container(
               child: Text(libraryName,
                 style: TextStyle(
-                    color: Color(0xff6200ee),
+                    color: Colors.lightBlue,
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold),
               )),
@@ -208,7 +223,7 @@ class PointAppState extends State<PointApp> {
                     child: Text(
                       "4.1",
                       style: TextStyle(
-                        color: Colors.black54,
+                        color: Colors.red,
                         fontSize: 18.0,
                       ),
                     )),
@@ -294,7 +309,7 @@ class PointAppState extends State<PointApp> {
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(target: LatLng(16.8092588, 96.1593468), zoom: 16),
+        initialCameraPosition: CameraPosition(target: LatLng(16.8091028, 96.1629651), zoom: 16),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
@@ -312,6 +327,7 @@ class PointAppState extends State<PointApp> {
   }
 }
 
+//for Marked in Goolgle Map 
 Marker developerMarker = Marker(
   markerId: MarkerId('developer'),
   position: LatLng(16.9284, 96.2346),

@@ -46,6 +46,7 @@ class NewsItem extends StatelessWidget {
         newsId: news.postId,
         newsContent: news.postContent,
         newsImage: news.image,
+      
       );
     }));
   }

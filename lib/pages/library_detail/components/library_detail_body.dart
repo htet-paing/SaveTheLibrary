@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:save_the_library/models/library/library.dart';
 
 class LibraryDetailBody extends StatelessWidget {
+  
   final BuiltLibraryDetail libraryDetail;
+
   const LibraryDetailBody({Key key, this.libraryDetail}) : super(key: key);
 
   @override
