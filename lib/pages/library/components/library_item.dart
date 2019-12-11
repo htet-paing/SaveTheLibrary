@@ -12,15 +12,15 @@ class LibraryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LibraryDetailPage(
-                libraryId: library.id,
-              ),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LibraryDetailPage(
+              libraryId: library.id,
             ),
           ),
-        },
+        ),
+      },
       child: Padding(
         padding: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0),
         child: Card(
@@ -34,16 +34,26 @@ class LibraryItem extends StatelessWidget {
                       'https://savethelibrarymyanmar.org/images/${library.image}',
                   fit: BoxFit.cover,
                   width: 1000.0,
-                  
                 ),
               ),
+              // Shown library name on Library List Page
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(3.0),
                 child: Text(
                   library.name,
                   style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 15.0),
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: Text(
+                  library.townshipName,
+                  style: TextStyle(
+                      fontFamily: 'Pyidaungsu',
+                      fontSize: 15.0,
+                      color: Colors.black38),
+                ),
+              ),
             ],
           ),
         ),
@@ -51,6 +61,28 @@ class LibraryItem extends StatelessWidget {
     );
   }
 }
+
+//Commented Dec 10
+
+// Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: <Widget>[
+//                     Padding(
+//                       padding: const EdgeInsets.only(top: 10.0, left: 10.0, bottom: 10.0),
+//                       child: Text(
+//                         "Save the Library",
+//                         style: TextStyle(color: Colors.red),
+//                       ),
+//                     ),
+//                     Padding(
+//                       padding: const EdgeInsets.only(top: 10.0, right: 10.0, bottom: 10.0),
+//                       child: Text(
+//                         "7 December, 2019",
+//                         style: TextStyle(color: Colors.red),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
 
 //   Widget build(BuildContext context) {
 //     return Card(

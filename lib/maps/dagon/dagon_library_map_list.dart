@@ -4,8 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:save_the_library/pages/home/home_page.dart';
 
-import 'package:save_the_library/main.dart';
-
 //Dagon Downtown Library
 // Need to invoke from Main()
 class DagonPointApp extends StatefulWidget {
