@@ -30,9 +30,13 @@ class _$BuiltBookPublisherListSerializer
       serializers.serialize(object.data,
           specifiedType: const FullType(
               BuiltList, const [const FullType(BuiltBookPublisher)])),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
+    if (object.total != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.total,
+            specifiedType: const FullType(int)));
+    }
     if (object.perPage != null) {
       result
         ..add('per_page')
@@ -252,9 +256,6 @@ class _$BuiltBookPublisherList extends BuiltBookPublisherList {
       : super._() {
     if (data == null) {
       throw new BuiltValueNullFieldError('BuiltBookPublisherList', 'data');
-    }
-    if (total == null) {
-      throw new BuiltValueNullFieldError('BuiltBookPublisherList', 'total');
     }
   }
 

@@ -24,6 +24,7 @@ import 'package:built_value/built_value.dart';
 ///
 
 abstract class GenericList {
+  @nullable
   int get total;
 
   @nullable

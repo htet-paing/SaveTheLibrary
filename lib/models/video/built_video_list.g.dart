@@ -25,9 +25,13 @@ class _$BuiltVideoListSerializer
       serializers.serialize(object.data,
           specifiedType:
               const FullType(BuiltList, const [const FullType(BuiltVideo)])),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
+    if (object.total != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.total,
+            specifiedType: const FullType(int)));
+    }
     if (object.perPage != null) {
       result
         ..add('per_page')
@@ -447,9 +451,6 @@ class _$BuiltVideoList extends BuiltVideoList {
       : super._() {
     if (data == null) {
       throw new BuiltValueNullFieldError('BuiltVideoList', 'data');
-    }
-    if (total == null) {
-      throw new BuiltValueNullFieldError('BuiltVideoList', 'total');
     }
   }
 

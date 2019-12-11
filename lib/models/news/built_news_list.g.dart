@@ -24,9 +24,13 @@ class _$BuiltNewsListSerializer implements StructuredSerializer<BuiltNewsList> {
       serializers.serialize(object.data,
           specifiedType:
               const FullType(BuiltList, const [const FullType(BuiltNews)])),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
+    if (object.total != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.total,
+            specifiedType: const FullType(int)));
+    }
     if (object.perPage != null) {
       result
         ..add('per_page')
@@ -306,9 +310,6 @@ class _$BuiltNewsList extends BuiltNewsList {
       : super._() {
     if (data == null) {
       throw new BuiltValueNullFieldError('BuiltNewsList', 'data');
-    }
-    if (total == null) {
-      throw new BuiltValueNullFieldError('BuiltNewsList', 'total');
     }
   }
 

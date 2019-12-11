@@ -30,9 +30,13 @@ class _$BuiltBookQueriedListSerializer
       serializers.serialize(object.data,
           specifiedType: const FullType(
               BuiltList, const [const FullType(BuiltBookQueried)])),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
+    if (object.total != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.total,
+            specifiedType: const FullType(int)));
+    }
     if (object.perPage != null) {
       result
         ..add('per_page')
@@ -305,9 +309,6 @@ class _$BuiltBookQueriedList extends BuiltBookQueriedList {
       : super._() {
     if (data == null) {
       throw new BuiltValueNullFieldError('BuiltBookQueriedList', 'data');
-    }
-    if (total == null) {
-      throw new BuiltValueNullFieldError('BuiltBookQueriedList', 'total');
     }
   }
 

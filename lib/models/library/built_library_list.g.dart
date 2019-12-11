@@ -71,9 +71,13 @@ class _$BuiltLibraryListSerializer
       serializers.serialize(object.data,
           specifiedType:
               const FullType(BuiltList, const [const FullType(BuiltLibrary)])),
-      'total',
-      serializers.serialize(object.total, specifiedType: const FullType(int)),
     ];
+    if (object.total != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.total,
+            specifiedType: const FullType(int)));
+    }
     if (object.perPage != null) {
       result
         ..add('per_page')
@@ -418,9 +422,6 @@ class _$BuiltLibraryList extends BuiltLibraryList {
       : super._() {
     if (data == null) {
       throw new BuiltValueNullFieldError('BuiltLibraryList', 'data');
-    }
-    if (total == null) {
-      throw new BuiltValueNullFieldError('BuiltLibraryList', 'total');
     }
   }
 
