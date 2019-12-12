@@ -11,7 +11,7 @@ class VideoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => goToVideoDetailPage(context, video.youtubeId),
+      onTap: () => goToVideoDetailPage(context, video),
       child: Padding(
         padding: EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0),
         child: Card(
@@ -41,13 +41,17 @@ class VideoItem extends StatelessWidget {
     );
   }
 
-  void goToVideoDetailPage(BuildContext context, String youtubeId) {
+  void goToVideoDetailPage(BuildContext context, BuiltVideo video) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
           return VideosDetailPage(
-            youtubeId: youtubeId,
+            youtubeId: video.youtubeId,
+            videoId: video.id,
+            postSlug: video.postSlug,
+            postTitle: video.postTitle,
+            postReview: video.postReview,
           );
         },
       ),
