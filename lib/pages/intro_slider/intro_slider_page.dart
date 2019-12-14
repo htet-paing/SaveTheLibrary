@@ -143,7 +143,7 @@ class MyIntroSliderState extends State<MyIntroSlider> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    
     return new IntroSlider(
       slides: this.slides,
 
