@@ -6,7 +6,6 @@ import 'package:save_the_library/widgets/type_def.dart';
 /// _T_ is type of Response's body return on get method
 ///
 class SmartSlider<T> extends StatefulWidget {
-
   ///[title] the title of the carousel which exists at the top of the associated carousel
   final String title;
 
@@ -88,7 +87,6 @@ class _SmartSlider1State extends State<SmartSlider> {
 
   @override
   Widget build(BuildContext context) {
-
     _onLoad();
     return Column(
       children: <Widget>[
@@ -117,7 +115,7 @@ class _SmartSlider1State extends State<SmartSlider> {
     );
   }
 
-  void _onLoad() async{
+  void _onLoad() async {
     try {
       var response = this.widget.onGet();
         if (response.connectionState == ConnectionState.done) {
@@ -132,5 +130,4 @@ class _SmartSlider1State extends State<SmartSlider> {
       print(err.toString());
     }
   }
-
 }

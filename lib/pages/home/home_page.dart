@@ -72,26 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             decoration: BoxDecoration(color: Colors.white),
           ),
-
           buildSubtitle('Categories'),
           buildDrawerItem(Icons.library_books, 'News', '/news'),
           buildDrawerItem(
               Icons.collections_bookmark, 'Libraries', '/libraries'),
           buildDrawerItem(Icons.book, 'Books', '/books'),
-
-//Added by Ar Kar Kyaw 
-// pull upp to see Text changed
-          DropdownMenuItem(
-            child: ListView(
-              children: <Widget>[
-                buildDrawerItem(Icons.map, 'Tamwe', '/tamwe'),
-                buildDrawerItem(Icons.map, 'Dagon', '/dagon'),
-                buildDrawerItem(Icons.map, 'Hlaing', '/hlaing')
-              ],
-            ),
-          ),
-          
-        
           buildDrawerItem(
               Icons.cloud_download, 'Resources Center', '/resources'),
           buildDrawerItem(Icons.video_library, 'Videos List', '/videos'),
