@@ -12,7 +12,7 @@ class BookAuthorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltBookAuthorList>(
+      builder: (context) => SmartList<BuiltBookAuthorList>(
         onGet: (page) => Provider.of<ApiService>(context).getBookAuthors(page),
         listGetter: (body) => body.data.toList(),
         itemBuilder: (context, item) {

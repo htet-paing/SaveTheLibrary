@@ -12,7 +12,7 @@ class PdfCategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltPdfCategoryList>(
+      builder: (conext) => SmartList<BuiltPdfCategoryList>(
         onGet: (page) =>
             Provider.of<ApiService>(context).getPdfCategories(page),
         listGetter: (body) => body.data.toList(),

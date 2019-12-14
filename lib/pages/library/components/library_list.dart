@@ -13,7 +13,7 @@ class LibraryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltLibraryList>(
+      builder: (context) => SmartList<BuiltLibraryList>(
         onGet: (page) => Provider.of<ApiService>(context).getLibraries(page),
         listGetter: (body) => body.data.toList(),
         itemBuilder: (context, item) => LibraryItem(

@@ -11,7 +11,7 @@ class PdfList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltPdfList>(
+      builder: (context) => SmartList<BuiltPdfList>(
         onGet: (page) => Provider.of<ApiService>(context).getPdfs(page),
         listGetter: (body) => body.data.toList(),
         itemBuilder: (context, item) {

@@ -41,13 +41,15 @@ class NewsItem extends StatelessWidget {
   }
 
   goToNewDetailPage(BuildContext context, BuiltNews news) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return NewsDetailPage(
-        newsId: news.postId,
-        newsContent: news.postContent,
-        newsImage: news.image,
-      
-      );
-    }));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return NewsDetailPage(
+            newsId: news.postId,
+          );
+        },
+      ),
+    );
   }
 }

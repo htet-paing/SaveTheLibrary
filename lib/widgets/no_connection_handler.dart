@@ -10,12 +10,12 @@ import 'package:save_the_library/models/connectivity_state.dart';
 class NoConnectionHandler extends StatefulWidget {
   /// widget to display when offline ( default one is provided)
   final Widget offlineWidget;
-  final Widget child;
+  final Widget Function(BuildContext) builder;
 
   NoConnectionHandler({
     Key key,
     this.offlineWidget = const NoConnectionWidget(),
-    @required this.child,
+    @required this.builder,
   }) : super(key: key);
 
   @override
@@ -36,10 +36,15 @@ class _NoConnectionHandlerState extends State<NoConnectionHandler> {
           return this.widget.offlineWidget;
         } else {
           this._widgetStatus = WidgetStatus.busy;
-          return this.widget.child;
+          return this.widget.builder(context);
         }
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 

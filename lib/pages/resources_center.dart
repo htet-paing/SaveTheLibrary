@@ -15,36 +15,36 @@ class ResourcesCenter extends StatefulWidget {
 }
 
 class _ResourcesCenterState extends State<ResourcesCenter> {
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      child: SmartSlider(//BuiltBooksList
-        title: "Resources Center",
-        onGet: (page) => Provider.of<ApiService>(context).getBooks(),
-        listGetter: (body) => body.data.toList(),
-        itemBuilder: (context, item) {
-          BuiltBook book = item as BuiltBook;
-          return Container(
-            width: 160.0,              
-          //TODO: custom card and container's properties goes here
-            child: Card(
-              child: Wrap(
-                children: <Widget>[
-                  Image.network('https://savethelibrarymyanmar.org/${book.featureImagePath}'),
-                  Text('${book.bookName}')
-                ],
+      child: SmartSlider(
+          //BuiltBooksList
+          title: "Resources Center",
+          onGet: (page) => Provider.of<ApiService>(context).getBooks(),
+          listGetter: (body) => body.data.toList(),
+          itemBuilder: (context, item) {
+            BuiltBook book = item as BuiltBook;
+            return Container(
+              width: 160.0,
+              //TODO: custom card and container's properties goes here
+              child: Card(
+                child: Wrap(
+                  children: <Widget>[
+                    Image.network(
+                        'https://savethelibrarymyanmar.org/${book.featureImagePath}'),
+                    Text('${book.bookName}')
+                  ],
+                ),
               ),
-            ),
-          );
-        }
-      ),
+            );
+          }),
     );
-  } 
+  }
 
   Future<void> launchInBrowser(String url) async {
-    if(await canLaunch(url)) { // methd from url_launcher
+    if (await canLaunch(url)) {
+      // methd from url_launcher
       await launch(
         url,
         forceSafariVC: false,
@@ -54,7 +54,4 @@ class _ResourcesCenterState extends State<ResourcesCenter> {
       throw 'Could not launch $url';
     }
   }
-  
-    
 }
-

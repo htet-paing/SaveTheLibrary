@@ -14,7 +14,7 @@ class VideoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltVideoList>(
+      builder: (context) => SmartList<BuiltVideoList>(
         onGet: (page) => Provider.of<ApiService>(context).getVideos(page),
         listGetter: (body) => body.data.toList(),
         itemBuilder: (_, item) {

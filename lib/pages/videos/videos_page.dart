@@ -15,7 +15,7 @@ class _VideosPageState extends State<VideosPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          'News',
+          'Videos',
           style: TextStyle(color: Colors.black),
         ),
       ),

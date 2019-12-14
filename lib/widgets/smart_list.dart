@@ -117,7 +117,7 @@ class _SmartListState<T> extends State<SmartList> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.offset > 1000) {
-        print(_scrollController.offset);
+        // print(_scrollController.offset);
         setState(() {
           _floatingButtonOpticity = 1.0;
         });

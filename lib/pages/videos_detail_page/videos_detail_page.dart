@@ -13,8 +13,12 @@ class VideosDetailPage extends StatefulWidget {
   final String postTitle;
   final String postReview;
 
-
-  VideosDetailPage({this.youtubeId,this.videoId,this.postSlug,this.postTitle,this.postReview});
+  VideosDetailPage(
+      {this.youtubeId,
+      this.videoId,
+      this.postSlug,
+      this.postTitle,
+      this.postReview});
 
   @override
   _VideosDetailPageState createState() => _VideosDetailPageState();
@@ -52,22 +56,21 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          'Videos Detail',
-          style: TextStyle(color: Colors.black),
+        key: _scaffoldKey,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            'Videos Detail',
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-      ),
-
-
         body: NoConnectionHandler(
-          child: FutureBuilder<Response<BuiltVideoDetail>>(
-            future: Provider.of<ApiService>(context).getVideoDetail(this.widget.postSlug),
-            builder:  (context, snapshot) {
+          builder: (context) => FutureBuilder<Response<BuiltVideoDetail>>(
+            future: Provider.of<ApiService>(context)
+                .getVideoDetail(this.widget.postSlug),
+            builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return ListView(
                   children: <Widget>[
@@ -107,7 +110,7 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
                         RemainingDuration(),
                         FullScreenButton(),
                       ],
-                      onReady: (){
+                      onReady: () {
                         print('Player is Ready');
                       },
                     ),
@@ -115,27 +118,30 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
                       padding: EdgeInsets.all(8.0),
                       child: Column(
                         children: <Widget>[
-                          Text(widget.postTitle,style: TextStyle(
-                              fontFamily: 'Pyidaungsu',
-                              fontSize: 17.0
-                          ),),
+                          Text(
+                            widget.postTitle,
+                            style: TextStyle(
+                                fontFamily: 'Pyidaungsu', fontSize: 17.0),
+                          ),
                           SizedBox(
                             height: 20.0,
                           ),
-                          Text(widget.postReview,style: TextStyle(
-                              fontFamily: 'Pyidaungsu'
-                          ),)
+                          Text(
+                            widget.postReview,
+                            style: TextStyle(fontFamily: 'Pyidaungsu'),
+                          )
                         ],
                       ),
                     )
                   ],
                 );
-              }else {
+              } else {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              }},
-          ),)
-    );
+              }
+            },
+          ),
+        ));
   }
 }

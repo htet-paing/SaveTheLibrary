@@ -13,7 +13,7 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoConnectionHandler(
-      child: SmartList<BuiltNewsList>(
+      builder: (context) => SmartList<BuiltNewsList>(
         onGet: (page) => Provider.of<ApiService>(context).getNews(page),
         listGetter: (body) => body.data.toList(),
         itemBuilder: (_, item) {
