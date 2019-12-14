@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_library/pages/resources_center.dart';
+import 'package:save_the_library/pages/home/home_widgets/book_reviews_widget.dart';
+import 'package:save_the_library/pages/home/home_widgets/libraries_slider_widget.dart';
+import 'package:save_the_library/pages/home/home_widgets/resources_center_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -29,11 +31,17 @@ class _MyHomePageState extends State<MyHomePage> {
             centerTitle: true,
           ),
           body: ListView(
+            scrollDirection: Axis.vertical,
             children: <Widget>[
-              SizedBox(
-                height: 500.0,
-                child: ResourcesCenter()
-              ),
+              //TODO: Widgets for HomePage here
+              BookReviewsWidget(),
+              SizedBox(height: 30.0),
+
+              ResopurcesCenterWidget(),
+              SizedBox(height: 30.0),
+
+              LibrariesSliderWidget(),
+              
             ],
           ),
           floatingActionButton: FloatingActionButton(

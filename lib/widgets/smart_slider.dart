@@ -1,4 +1,3 @@
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 
@@ -10,23 +9,23 @@ class SmartSlider<T> extends StatefulWidget {
   ///[title] the title of the carousel which exists at the top of the associated carousel
   final String title;
 
-  /// [onGet] will pass _page_ parameter. use that _page_ inside api get method.
+  /// [onSGet] will pass _page_ parameter. use that _page_ inside api get method.
   ///
   /// i.e: need to return the type of Future<Response<_SmartList Type_>>
   ///
   /// eg:
   /// ```dart
   /// SmartList<BuiltBookList> {
-  ///   onGet: (int page) => Provider.of<ApiService>(context).getBooks(page);
+  ///   onGet: () => Provider.of<ApiService>(context).getBooks();
   ///   // should return Future<Response<BuiltBookList>>
   /// }
   ///
   /// SmartList<BuiltLibraryList> {
-  ///   onGet: (int page) => Provider.of<ApiService>(context).getLibraries(page);
+  ///   onGet: () => Provider.of<ApiService>(context).getLibraries();
   ///   // should return Future<Response<BuiltLibraryList>>
   /// }
   /// ```
-  final OnGet<T> onGet;
+  final OnSnapshotGet<T> onGet;
 
   /// [listGetter] will pass _body_ ( of Response ).
   ///
@@ -70,17 +69,14 @@ class SmartSlider<T> extends StatefulWidget {
   /// ```
   final ItemBuilder itemBuilder;
 
-  ///[onClick] pass in a function to pe called when clicked on individual items
-  final Function onClick;
 
-  SmartSlider(
-      {@required this.title,
-      @required this.listGetter,
-      @required this.itemBuilder,
-      @required this.onGet,
-      @required this.onClick,
-      Key key})
-      : super(key: key);
+  SmartSlider({
+    @required this.title,
+    @required this.listGetter,
+    @required this.itemBuilder,
+    @required this.onGet,
+    Key key
+    }) : super(key: key);
 
   @override
   _SmartSlider1State createState() => _SmartSlider1State();
@@ -92,41 +88,45 @@ class _SmartSlider1State extends State<SmartSlider> {
   @override
   Widget build(BuildContext context) {
     _onLoad();
-    return ListView(children: <Widget>[
-      Text("${this.widget.title}"),
-      Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 20.0),
-            height: 300.0,
-            child: ListView.builder(
-              itemCount: _itemList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, int index) {
-                if (index < _itemList.length) {
-                  return this
-                      .widget
-                      .itemBuilder(context, _itemList.elementAt(index));
-                }
-              },
+    return Column(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text("${this.widget.title}")
+        ),
+        Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 20.0),
+              height: 300.0,
+              child: ListView.builder(
+                itemCount: _itemList.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context,int index) {
+                  if(index < _itemList.length){
+                    return this.widget.itemBuilder(context, _itemList.elementAt(index));
+                  }
+                },
+              ),
             ),
-          ),
-        ],
-      ),
-    ]);
+          ],
+        ),
+      ]
+    );
   }
 
   void _onLoad() async {
     try {
-      Response response = await this.widget.onGet(1);
-      if (response.statusCode == 200) {
-        setState(() {
-          _itemList.addAll(this.widget.listGetter(response.body));
-        });
-      } else {
-        print('ERROR! : ${response.statusCode.toString()}');
-      }
-    } catch (err) {
+      var response = this.widget.onGet();
+        if (response.connectionState == ConnectionState.done) {
+          setState(() {
+            _itemList.addAll(this.widget.listGetter(response.data.body));
+          });
+        } else {
+          print('ERROR! : ${response.connectionState}');
+        }
+
+    } catch (err){
       print(err.toString());
     }
   }
