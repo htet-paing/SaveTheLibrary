@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:save_the_library/pages/resources_center.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -26,6 +27,20 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             title: Text('Save the Library'),
             centerTitle: true,
+          ),
+          body: ListView(
+            children: <Widget>[
+              SizedBox(
+                height: 500.0,
+                child: ResourcesCenter()
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.done),
+            onPressed: () {
+              Navigator.pushNamed(context, '/resourcescenter');
+            },
           ),
           drawer: buildDrawer()),
     );
