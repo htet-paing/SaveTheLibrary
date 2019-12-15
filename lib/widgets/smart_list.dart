@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
+import 'package:save_the_library/pages/home/home_page.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 
 /// [SmartList] provide _pull to refresh_, _pagination_, and other additional features out-of-the-box with few configuration
@@ -92,7 +93,8 @@ class SmartList<T> extends StatefulWidget {
       );
 }
 
-class _SmartListState<T> extends State<SmartList> {
+class _SmartListState<T> extends State<SmartList>
+    with TickerProviderStateMixin<SmartList> {
   OnGet<T> _onGet;
   ListGetter<T> _listGetter;
 
@@ -105,7 +107,7 @@ class _SmartListState<T> extends State<SmartList> {
   ScrollController _scrollController;
   int _currentPage;
   List<dynamic> _itemList = [];
-  double _floatingButtonOpticity = 0.0;
+  AnimationController _fabAnimationController;
 
   @override
   void initState() {
@@ -115,16 +117,17 @@ class _SmartListState<T> extends State<SmartList> {
     );
 
     _scrollController = ScrollController();
+
+    _fabAnimationController = new AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    );
     _scrollController.addListener(() {
       if (_scrollController.offset > 1000) {
         // print(_scrollController.offset);
-        setState(() {
-          _floatingButtonOpticity = 1.0;
-        });
+        _fabAnimationController.forward();
       } else {
-        setState(() {
-          _floatingButtonOpticity = 0.0;
-        });
+        _fabAnimationController.reverse();
       }
     });
     super.initState();
@@ -155,10 +158,12 @@ class _SmartListState<T> extends State<SmartList> {
         Container(
           child: Align(
             alignment: Alignment(0.8, 0.9),
-            child: AnimatedOpacity(
+            child: ScaleTransition(
+              scale: _fabAnimationController
+                  .drive(CurveTween(curve: Curves.fastOutSlowIn)),
               child: FloatingActionButton(
-                heroTag: typeOf<
-                    T>(), // need if there are two floating action bottom in the same screen
+                // need if there are two floating action bottom in the same screen
+                heroTag: typeOf<T>(),
                 onPressed: () {
                   _scrollController.animateTo(
                     0.0,
@@ -168,8 +173,6 @@ class _SmartListState<T> extends State<SmartList> {
                 },
                 child: Icon(Icons.arrow_upward),
               ),
-              duration: Duration(milliseconds: 500),
-              opacity: _floatingButtonOpticity,
             ),
           ),
         ),
