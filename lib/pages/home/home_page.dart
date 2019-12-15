@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_library/pages/home/home_widgets/book_reviews_widget.dart';
-import 'package:save_the_library/pages/home/home_widgets/libraries_slider_widget.dart';
-import 'package:save_the_library/pages/home/home_widgets/resources_center_widget.dart';
+import 'package:save_the_library/pages/home/components/book_slider.dart';
+import 'package:save_the_library/pages/home/components/library_slider.dart';
+import 'package:save_the_library/pages/home/components/resource_slider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,44 +13,38 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.black),
-            backgroundColor: Colors.white,
-            elevation: 0,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-                onPressed: () => {},
-              )
-            ],
-            title: Text('Save the Library'),
-            centerTitle: true,
-          ),
-          body: ListView(
-            scrollDirection: Axis.vertical,
-            children: <Widget>[
-              //TODO: Widgets for HomePage here
-              BookReviewsWidget(),
-              SizedBox(height: 30.0),
+          elevation: 0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              onPressed: () => {},
+            )
+          ],
+          title: Text('Save the Library'),
+          centerTitle: true,
+        ),
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            //TODO: Widgets for HomePage here
+            BookSlider(),
+            SizedBox(height: 30.0),
 
-              ResopurcesCenterWidget(),
-              SizedBox(height: 30.0),
+            ResourceSlider(),
+            SizedBox(height: 30.0),
 
-              LibrariesSliderWidget(),
-              
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.done),
-            onPressed: () {
-              Navigator.pushNamed(context, '/resourcescenter');
-            },
-          ),
-          drawer: buildDrawer()),
+            LibrarySlider(),
+          ],
+        ),
+        drawer: buildDrawer(),
+      ),
     );
   }
 

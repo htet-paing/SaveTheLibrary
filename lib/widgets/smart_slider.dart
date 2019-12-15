@@ -1,3 +1,4 @@
+import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 
@@ -9,23 +10,23 @@ class SmartSlider<T> extends StatefulWidget {
   ///[title] the title of the carousel which exists at the top of the associated carousel
   final String title;
 
-  /// [onSGet] will pass _page_ parameter. use that _page_ inside api get method.
+  /// [onGet] will pass _page_ parameter. use that _page_ inside api get method.
   ///
-  /// i.e: need to return the type of Future<Response<_SmartList Type_>>
+  /// i.e: need to return the type of Future<Response<_SmartSlider Type_>>
   ///
   /// eg:
   /// ```dart
-  /// SmartList<BuiltBookList> {
+  /// SmartSlider<BuiltBookList> {
   ///   onGet: () => Provider.of<ApiService>(context).getBooks();
   ///   // should return Future<Response<BuiltBookList>>
   /// }
   ///
-  /// SmartList<BuiltLibraryList> {
+  /// SmartSlider<BuiltLibraryList> {
   ///   onGet: () => Provider.of<ApiService>(context).getLibraries();
   ///   // should return Future<Response<BuiltLibraryList>>
   /// }
   /// ```
-  final OnSnapshotGet<T> onGet;
+  final OnGet<T> onGet;
 
   /// [listGetter] will pass _body_ ( of Response ).
   ///
@@ -33,12 +34,12 @@ class SmartSlider<T> extends StatefulWidget {
   ///
   /// eg:
   /// ```dart
-  /// SmartList<BuiltBookList> {
+  /// SmartSlider<BuiltBookList> {
   ///   onGet: (int page) => Provider.of<ApiService>(context).getBooks(page);
   ///   listGetter: (BuiltLibrariesList body) => body.data.toList();
   /// }
   ///
-  /// SmartList<BuiltLibraryList> {
+  /// SmartSlider<BuiltLibraryList> {
   ///   onGet: (int page) => Provider.of<ApiService>(context).getLibraries(page);
   ///   listGetter: (BuiltLibraryList body) => body.data.toList();
   /// }
@@ -49,7 +50,7 @@ class SmartSlider<T> extends StatefulWidget {
   ///
   /// eg:
   /// ```dart
-  /// SmartList<BuiltBookList> {
+  /// SmartSlider<BuiltBookList> {
   ///   ...
   ///   listGetter: (BuiltLibrariesList body) => body.data.toList();
   ///   itemBuilder: (context, dynamic item) {
@@ -58,7 +59,7 @@ class SmartSlider<T> extends StatefulWidget {
   ///   }
   /// }
   ///
-  /// SmartList<BuiltLibraryList> {
+  /// SmartSlider<BuiltLibraryList> {
   ///   ...
   ///   listGetter: (BuiltLibraryList body) => body.data.toList();
   ///   itemBuilder: (context, dynamic item) {
@@ -69,65 +70,52 @@ class SmartSlider<T> extends StatefulWidget {
   /// ```
   final ItemBuilder itemBuilder;
 
-
-  SmartSlider({
-    @required this.title,
-    @required this.listGetter,
-    @required this.itemBuilder,
-    @required this.onGet,
-    Key key
-    }) : super(key: key);
+  SmartSlider(
+      {@required this.title,
+      @required this.listGetter,
+      @required this.itemBuilder,
+      @required this.onGet,
+      Key key})
+      : super(key: key);
 
   @override
   _SmartSlider1State createState() => _SmartSlider1State();
 }
 
 class _SmartSlider1State extends State<SmartSlider> {
-  var _itemList = Set();
+  List _itemList;
 
   @override
   Widget build(BuildContext context) {
-    _onLoad();
-    return Column(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text("${this.widget.title}")
-        ),
-        Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0),
-              height: 300.0,
-              child: ListView.builder(
-                itemCount: _itemList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context,int index) {
-                  if(index < _itemList.length){
-                    return this.widget.itemBuilder(context, _itemList.elementAt(index));
-                  }
-                },
-              ),
+    return FutureBuilder<Response<dynamic>>(
+      future: this.widget.onGet(1),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          _itemList = this.widget.listGetter(snapshot.data.body);
+          return Column(children: <Widget>[
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text("${this.widget.title}")),
+            Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20.0),
+                  height: 300.0,
+                  child: ListView.builder(
+                    itemCount: _itemList.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, int index) {
+                      return this.widget.itemBuilder(context, _itemList[index]);
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ]
-    );
-  }
-
-  void _onLoad() async {
-    try {
-      var response = this.widget.onGet();
-        if (response.connectionState == ConnectionState.done) {
-          setState(() {
-            _itemList.addAll(this.widget.listGetter(response.data.body));
-          });
+          ]);
         } else {
-          print('ERROR! : ${response.connectionState}');
+          return Center(child: CircularProgressIndicator());
         }
-
-    } catch (err){
-      print(err.toString());
-    }
+      },
+    );
   }
 }
