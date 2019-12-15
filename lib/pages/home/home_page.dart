@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:save_the_library/pages/home/components/book_slider.dart';
 import 'package:save_the_library/pages/home/components/library_slider.dart';
+import 'package:save_the_library/pages/home/components/news_caro_slider.dart';
 import 'package:save_the_library/pages/home/components/resource_slider.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -34,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
           scrollDirection: Axis.vertical,
           children: <Widget>[
             //TODO: Widgets for HomePage here
+            NewsSlider(),
             BookSlider(),
             SizedBox(height: 30.0),
 

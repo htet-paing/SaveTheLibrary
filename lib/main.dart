@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<ApiService>(
-          create: (_) => ApiService.create(),
+          builder: (_) => ApiService.create(),
           dispose: (_, apiService) => apiService.dispose(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ConnectivityState(),
+          builder: (_) => ConnectivityState(),
         )
       ],
       child: MaterialApp(
