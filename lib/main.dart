@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/maps/dagon/dagon_library_map_list.dart';
-import 'package:save_the_library/maps/hlaing/hlaing_library_map_list.dart';
-import 'package:save_the_library/maps/tamwe/tamwe_lirary_map_list.dart';
 import 'package:save_the_library/pages/books/books_page.dart';
 import 'package:save_the_library/pages/developers/information.dart';
 import 'package:save_the_library/pages/intro_slider/intro_slider_page.dart';
@@ -71,9 +68,6 @@ class MyApp extends StatelessWidget {
           "/books": (context) => BooksPage(),
           "/resources": (context) => ResourceCenterPage(),
           "/videos": (context) => VideosPage(),
-          "/tamwe": (BuildContext context) => TamwePointApp(),
-          "/dagon": (BuildContext context) => DagonPointApp(),
-          "/hlaing": (BuildContext context) => HlaingPointApp(),
           "/developer": (BuildContext context) => ProfileSixPage(sid),
         },
       ),

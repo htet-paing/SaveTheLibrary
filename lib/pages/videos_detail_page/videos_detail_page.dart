@@ -2,23 +2,19 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/video/built_video_detail.dart';
+import 'package:save_the_library/models/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideosDetailPage extends StatefulWidget {
   final String youtubeId;
-  final int videoId;
   final String postSlug;
-  final String postTitle;
-  final String postReview;
 
-  VideosDetailPage(
-      {this.youtubeId,
-      this.videoId,
-      this.postSlug,
-      this.postTitle,
-      this.postReview});
+  VideosDetailPage({
+      @required this.postSlug,
+      @required this.youtubeId,
+      Key key}): super(key: key);
 
   @override
   _VideosDetailPageState createState() => _VideosDetailPageState();
@@ -72,6 +68,7 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
                 .getVideoDetail(this.widget.postSlug),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
+                BuiltVideoDetail videoDetail = snapshot.data.body;
                 return ListView(
                   children: <Widget>[
                     YoutubePlayer(
@@ -119,7 +116,7 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            widget.postTitle,
+                            videoDetail.postTitle,
                             style: TextStyle(
                                 fontFamily: 'Pyidaungsu', fontSize: 17.0),
                           ),
@@ -127,7 +124,7 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
                             height: 20.0,
                           ),
                           Text(
-                            widget.postReview,
+                            videoDetail.postReview,
                             style: TextStyle(fontFamily: 'Pyidaungsu'),
                           )
                         ],

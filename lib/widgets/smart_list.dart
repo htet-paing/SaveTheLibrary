@@ -1,7 +1,7 @@
 import 'package:chopper/chopper.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 

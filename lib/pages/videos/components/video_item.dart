@@ -48,10 +48,7 @@ class VideoItem extends StatelessWidget {
         builder: (BuildContext context) {
           return VideosDetailPage(
             youtubeId: video.youtubeId,
-            videoId: video.id,
             postSlug: video.postSlug,
-            postTitle: video.postTitle,
-            postReview: video.postReview,
           );
         },
       ),
