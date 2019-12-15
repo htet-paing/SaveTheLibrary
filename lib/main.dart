@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<ApiService>(
-          builder: (_) => ApiService.create(),
+          create: (_) => ApiService.create(),
           dispose: (_, apiService) => apiService.dispose(),
         ),
         ChangeNotifierProvider(
-          builder: (_) => ConnectivityState(),
+          create: (_) => ConnectivityState(),
         )
       ],
       child: MaterialApp(
@@ -54,7 +54,12 @@ class MyApp extends StatelessWidget {
                 return MyHomePage();
               }
             } else {
-              return Container();
+              return Container(
+                color: Colors.white,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
             }
           },
         ),
@@ -65,11 +70,9 @@ class MyApp extends StatelessWidget {
           "/books": (context) => BooksPage(),
           "/resources": (context) => ResourceCenterPage(),
           "/videos": (context) => VideosPage(),
-
           "/tamwe": (BuildContext context) => TamwePointApp(),
           "/dagon": (BuildContext context) => DagonPointApp(),
           "/hlaing": (BuildContext context) => HlaingPointApp(),
-
           "/developer": (BuildContext context) => ProfileSixPage(sid),
         },
       ),
