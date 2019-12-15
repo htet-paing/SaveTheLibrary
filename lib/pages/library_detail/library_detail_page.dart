@@ -13,7 +13,10 @@ import '../../network/api_service.dart';
 class LibraryDetailPage extends StatefulWidget {
   final int libraryId;
 
-  LibraryDetailPage({@required this.libraryId, Key key}) : super(key: key);
+  LibraryDetailPage({
+    @required this.libraryId,
+    Key key,
+  }) : super(key: key);
 
   @override
   _LibraryDetailPageState createState() => _LibraryDetailPageState();
@@ -34,23 +37,27 @@ class _LibraryDetailPageState extends State<LibraryDetailPage> {
       ),
       body: NoConnectionHandler(
         builder: (context) => FutureBuilder<Response<BuiltLibraryDetail>>(
-            future: Provider.of<ApiService>(context)
-                .getLibraryDetail(this.widget.libraryId),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                BuiltLibraryDetail library = snapshot.data.body;
-
-                return ListView(
-                  children: <Widget>[
-                    GoogleMapWidget(
-                      libraryId: library.id,
-                      latitude: library.latitude,
-                      longitude: library.longitude,
-                    ),
-                  ],
-                );
-              }
-            }),
+          future: Provider.of<ApiService>(context)
+              .getLibraryDetail(this.widget.libraryId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              BuiltLibraryDetail library = snapshot.data.body;
+              return ListView(
+                children: <Widget>[
+                  GoogleMapWidget(
+                    libraryId: widget.libraryId,
+                    latitude: library.latitude,
+                    longitude: library.longitude,
+                  )
+                ],
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
