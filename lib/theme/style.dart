@@ -16,7 +16,7 @@ ThemeData appTheme() {
     ),
     appBarTheme: AppBarTheme(
       color: Colors.white,
-      elevation: 1,
+      elevation: 2.0,
       iconTheme: IconThemeData(color: Colors.grey),
       textTheme: TextTheme(
         title: TextStyle(

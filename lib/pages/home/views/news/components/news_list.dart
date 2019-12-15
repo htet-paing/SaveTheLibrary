@@ -4,7 +4,6 @@ import 'package:save_the_library/models/news/built_news_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:save_the_library/widgets/smart_list.dart';
-
 import 'news_item.dart';
 
 class NewsList extends StatelessWidget {
