@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/pages/books/books_page.dart';
 import 'package:save_the_library/pages/developers/information.dart';
 import 'package:save_the_library/pages/intro_slider/intro_slider_page.dart';
-import 'package:save_the_library/pages/library/library_page.dart';
-import 'package:save_the_library/pages/news/news_page.dart';
 import 'package:save_the_library/pages/home/home_page.dart';
-import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
-import 'package:save_the_library/pages/videos/videos_page.dart';
 import 'package:save_the_library/theme/style.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,11 +58,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: <String, WidgetBuilder>{
           "/home": (BuildContext context) => MyHomePage(),
-          "/news": (BuildContext context) => NewsPage(),
-          "/libraries": (BuildContext context) => LibrariesPage(),
-          "/books": (context) => BooksPage(),
-          "/resources": (context) => ResourceCenterPage(),
-          "/videos": (context) => VideosPage(),
+          // "/resources": (BuildContext context) => ResourceCenterPage(),
           "/developer": (BuildContext context) => ProfileSixPage(sid),
         },
       ),
