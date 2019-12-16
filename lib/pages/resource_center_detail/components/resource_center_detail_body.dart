@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:save_the_library/models/pdf/pdf.dart';
-import 'package:save_the_library/pages/home/components/resource_slider.dart';
 
 
 class PdfListBody extends StatelessWidget {
