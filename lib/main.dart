@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:save_the_library/pages/developers/information.dart';
 import 'package:save_the_library/pages/intro_slider/intro_slider_page.dart';
 import 'package:save_the_library/pages/home/home_page.dart';
-import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
 import 'package:save_the_library/theme/style.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,7 +58,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: <String, WidgetBuilder>{
           "/home": (BuildContext context) => MyHomePage(),
-          "/resources": (BuildContext context) => ResourceCenterPage(),
+          // "/resources": (BuildContext context) => ResourceCenterPage(),
           "/developer": (BuildContext context) => ProfileSixPage(sid),
         },
       ),
