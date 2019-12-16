@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/video/built_video_list.dart';
@@ -7,14 +6,14 @@ import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/videos_detail_page/videos_detail_page.dart';
 import 'package:save_the_library/widgets/smart_slider.dart';
 
-class VideosSliderWidget extends StatefulWidget {
-  VideosSliderWidget({Key key}) : super(key: key);
+class VideoSlider extends StatefulWidget {
+  VideoSlider({Key key}) : super(key: key);
 
   @override
-  _VideosSliderWidgetState createState() => _VideosSliderWidgetState();
+  _VideoSliderState createState() => _VideoSliderState();
 }
 
-class _VideosSliderWidgetState extends State<VideosSliderWidget> {
+class _VideoSliderState extends State<VideoSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
