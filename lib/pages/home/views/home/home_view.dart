@@ -36,6 +36,7 @@ class _HomeViewState extends State<HomeView> {
         SizedBox(height: 30.0),
 
         LibrarySlider(),
+        
       ],
     );
   }

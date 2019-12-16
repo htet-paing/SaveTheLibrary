@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: <String, WidgetBuilder>{
           "/home": (BuildContext context) => MyHomePage(),
-          "/resources": (context) => ResourceCenterPage(),
+          "/resources": (BuildContext context) => ResourceCenterPage(),
           "/developer": (BuildContext context) => ProfileSixPage(sid),
         },
       ),

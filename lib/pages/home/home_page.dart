@@ -1,11 +1,14 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_library/pages/home/views/books/books_view.dart';
+import 'package:save_the_library/pages/home/views/home/components/resource_slider.dart';
 import 'package:save_the_library/pages/home/views/home/home_view.dart';
 import 'package:save_the_library/pages/home/views/libraries/libraries_view.dart';
 import 'package:save_the_library/pages/home/views/news/news_view.dart';
+import 'package:save_the_library/pages/home/views/resource_center/resource_center_view.dart';
 import 'package:save_the_library/pages/home/views/videos/videos_view.dart';
 import 'package:save_the_library/pages/home/views/view_widget.dart';
+import 'package:save_the_library/pages/resource_center/components/pdf_list.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -25,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage>
     LibrariesView(),
     BooksView(),
     VideosView(),
+    PdfView(),
   ];
 
   @override
@@ -60,10 +64,11 @@ class _MyHomePageState extends State<MyHomePage>
               message: 'Use for Testing',
               child: IconButton(
                 icon: Icon(
+                  
                   Icons.open_in_new,
                   color: Colors.black,
                 ),
-                onPressed: () => {},
+                onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => PdfList()))},
               ),
             )
           ],
