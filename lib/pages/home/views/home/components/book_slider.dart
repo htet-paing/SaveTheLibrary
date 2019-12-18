@@ -21,7 +21,7 @@ class _BookSliderState extends State<BookSlider> {
     return SizedBox(
       height: 360.0,
       child: Container(
-        child: SmartSlider(
+        child: SmartSlider( 
           //BuiltBooksList
           title: "Book Reviews",
           onGet: (_) => Provider.of<ApiService>(context).getBooks(1),
@@ -33,31 +33,53 @@ class _BookSliderState extends State<BookSlider> {
                 width: 160.0,
                 //TODO: custom card and container's properties goes here
                 child: Card(
-                  child: Wrap(
+                  child: Stack(
                     children: <Widget>[
                       CachedNetworkImage(
                         imageUrl:
                             'https://savethelibrarymyanmar.org/${book.featureImagePath}',
                         fit: BoxFit.cover,
                       ),
-                      Text('${book.bookName}')
+                      Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.black87,
+                              Colors.black54,
+                              const Color(0x00000000),
+                            ],              
+                          )
+                        ),
+                      //Text('${book.bookName}')
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 140.0,left: 5.0),
+                        child: Text(
+                          "${book.bookName}",
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        )
+                      )
                     ],
                   ),
                 ),
               ),
               onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookDetailPage(
-                    //not finished
-                    bookId: book.id,
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookDetailPage(
+                      //not finished
+                      bookId: book.id,
+                    ),
                   ),
                 ),
-              ),
             );
-          },
-        ),
-      ),
+          }
+        )
+      )
     );
   }
 }

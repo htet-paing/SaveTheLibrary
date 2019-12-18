@@ -8,9 +8,13 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(book.bookName),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 4,
+        child: ListTile(
+          title: Text(book.bookName),
+        ),
       ),
     );
   }

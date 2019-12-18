@@ -100,7 +100,7 @@ class _SmartSlider1State extends State<SmartSlider> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 20.0),
-                  height: 300.0,
+                  height: 210.0,
                   child: ListView.builder(
                     itemCount: _itemList.length,
                     scrollDirection: Axis.horizontal,
