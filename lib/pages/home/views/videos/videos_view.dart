@@ -18,6 +18,8 @@ class VideosView extends StatefulWidget implements ViewWidget {
 class _VideosViewState extends State<VideosView> {
   @override
   Widget build(BuildContext context) {
-    return VideoList();
+    return Scaffold(
+      body: VideoList(),
+    );
   }
 }

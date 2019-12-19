@@ -14,6 +14,8 @@ class NewsView extends StatelessWidget implements ViewWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NewsList();
+    return Scaffold(
+      body: NewsList(),
+    );
   }
 }
