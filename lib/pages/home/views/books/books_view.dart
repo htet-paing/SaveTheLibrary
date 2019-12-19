@@ -24,10 +24,10 @@ class BooksView extends StatefulWidget implements ViewWidget {
 
 class _BooksViewState extends State<BooksView> {
   List<Widget> _widgetList = [
-    BookList(key: ValueKey(typeOf<BookList>())),
-    BookAuthorList(key: ValueKey(typeOf<BookAuthorList>())),
-    BookCategoryList(key: ValueKey(typeOf<BookCategoryList>())),
-    BookPublisherList(key: ValueKey(typeOf<BookPublisherList>())),
+    BookList(),
+    BookAuthorList(),
+    BookCategoryList(),
+    BookPublisherList(),
   ];
 
   @override
@@ -40,10 +40,10 @@ class _BooksViewState extends State<BooksView> {
           unselectedLabelColor: Colors.grey,
           indicatorColor: Colors.teal,
           tabs: [
-            Tab(icon: Icon(Icons.book)),
-            Tab(icon: Icon(Icons.person)),
-            Tab(icon: Icon(Icons.category)),
-            Tab(icon: Icon(Icons.print)),
+            Tab(icon: Text("Books")),
+            Tab(icon: Text("Authors")),
+            Tab(icon: Text("Category")),
+            Tab(icon: Text("Publisher")),
           ],
         ),
         body: TabBarView(

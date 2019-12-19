@@ -6,7 +6,6 @@ import 'package:save_the_library/pages/home/views/home/home_view.dart';
 import 'package:save_the_library/pages/home/views/libraries/libraries_view.dart';
 import 'package:save_the_library/pages/home/views/news/news_view.dart';
 import 'package:save_the_library/pages/home/views/resource_center/resource_center_view.dart';
-import 'package:save_the_library/pages/home/views/videos/videos_view.dart';
 import 'package:save_the_library/pages/home/views/view_widget.dart';
 import 'package:save_the_library/pages/home/views/resource_center/components/pdf_list.dart';
 
@@ -27,8 +26,6 @@ class _MyHomePageState extends State<MyHomePage>
     NewsView(),
     LibrariesView(),
     BooksView(),
-    VideosView(),
-    PdfView(),
   ];
 
   @override
@@ -64,11 +61,13 @@ class _MyHomePageState extends State<MyHomePage>
               message: 'Use for Testing',
               child: IconButton(
                 icon: Icon(
-                  
                   Icons.open_in_new,
                   color: Colors.black,
                 ),
-                onPressed: () => {Navigator.push(context, MaterialPageRoute(builder: (context) => PdfList()))},
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PdfList()))
+                },
               ),
             )
           ],
