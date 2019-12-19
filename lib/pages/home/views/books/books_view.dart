@@ -9,17 +9,18 @@ import 'package:save_the_library/pages/home/views/books/components/book_publishe
 import 'package:save_the_library/pages/home/views/view_widget.dart';
 
 class BooksView extends StatefulWidget implements ViewWidget {
-  final Widget title;
-  final Icon icon;
-
   BooksView({
     Key key,
-    this.title = const Text('Reviews'),
-    this.icon = const Icon(Icons.rate_review),
   }) : super(key: key);
 
   @override
   _BooksViewState createState() => _BooksViewState();
+
+  @override
+  Icon get icon => Icon(Icons.rate_review);
+
+  @override
+  Widget get title => Text("Reviews");
 }
 
 class _BooksViewState extends State<BooksView> {

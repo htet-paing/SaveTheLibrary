@@ -6,19 +6,20 @@ import 'components/library_list.dart';
 import 'package:save_the_library/pages/home/views/libraries/components/library_state.dart';
 
 class LibrariesView extends StatefulWidget implements ViewWidget {
-  final Widget title;
-  final Icon icon;
-
   const LibrariesView({
     Key key,
-    this.title = const Text('Libraries'),
-    this.icon = const Icon(Icons.local_library),
   }) : super(key: key);
 
   @override
   _LibrariesViewState createState() => _LibrariesViewState();
+
+  Icon get icon => Icon(Icons.local_library);
+
+  @override
+  Widget get title => Text("Libraries");
 }
 
+@override
 class _LibrariesViewState extends State<LibrariesView> {
   List<Widget> _widgetList = [LibraryList(), LibraryState()];
   @override

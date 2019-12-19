@@ -3,10 +3,9 @@ import 'package:save_the_library/pages/home/views/books/books_view.dart';
 import 'package:save_the_library/pages/home/views/home/home_view.dart';
 import 'package:save_the_library/pages/home/views/libraries/libraries_view.dart';
 import 'package:save_the_library/pages/home/views/news/news_view.dart';
-import 'package:save_the_library/pages/home/views/resource_center/resource_center_view.dart';
+import 'package:save_the_library/pages/home/views/setting/setting_view.dart';
 import 'package:save_the_library/pages/home/views/view_widget.dart';
-import 'package:save_the_library/pages/home/views/resource_center/components/pdf_list.dart';
-import 'package:save_the_library/pages/settingpage/setting_page.dart';
+import 'package:save_the_library/pages/setting_page/setting_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -25,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage>
     NewsView(),
     LibrariesView(),
     BooksView(),
+    SettingView(),
   ];
 
   @override

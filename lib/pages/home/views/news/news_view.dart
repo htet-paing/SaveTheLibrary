@@ -6,16 +6,18 @@ import 'package:save_the_library/pages/home/views/view_widget.dart';
 import 'components/news_list.dart';
 
 class NewsView extends StatefulWidget implements ViewWidget {
-  final Widget title;
-  final Icon icon;
   const NewsView({
     Key key,
-    this.title = const Text('News'),
-    this.icon = const Icon(Icons.library_books),
   }) : super(key: key);
 
   @override
   _NewsViewState createState() => _NewsViewState();
+
+  @override
+  Icon get icon => Icon(Icons.library_books);
+
+  @override
+  Widget get title => Text("News");
 }
 
 class _NewsViewState extends State<NewsView> {

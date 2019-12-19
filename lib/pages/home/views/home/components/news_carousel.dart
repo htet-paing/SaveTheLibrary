@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/news/built_news_list.dart';
 import 'package:save_the_library/network/api_service.dart';
-import 'package:save_the_library/pages/news_detail.dart/news_detail_page.dart';
+import 'package:save_the_library/pages/news_detail/news_detail_page.dart';
 
 class NewsCarousel extends StatefulWidget {
   NewsCarousel({Key key}) : super(key: key);

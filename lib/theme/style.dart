@@ -22,7 +22,7 @@ ThemeData appTheme(Brightness brightness) {
     appBarTheme: AppBarTheme(
       color: primaryColor,
       elevation: 2.0,
-      iconTheme: IconThemeData(color: Colors.grey),
+      iconTheme: IconThemeData(color: Colors.white),
       textTheme: TextTheme(
         title: TextStyle(
           color: Colors.white,

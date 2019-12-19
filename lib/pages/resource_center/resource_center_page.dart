@@ -1,32 +1,21 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:save_the_library/pages/resource_center/components/pdf_category_list.dart';
-// import 'package:save_the_library/pages/resource_center/components/pdf_list.dart';
-
-
 import 'package:flutter/material.dart';
-import 'package:save_the_library/pages/home/views/view_widget.dart';
-
 import 'components/pdf_list.dart';
 
-class PdfView extends StatelessWidget implements ViewWidget {
-  final Widget title;
-  final Icon icon;
-  const PdfView({
+class ResourceCenterPage extends StatelessWidget {
+  const ResourceCenterPage({
     Key key,
-    this.title = const Text('PDFs Download'),
-    this.icon = const Icon(Icons.add),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Resource Center"),
+      ),
       body: PdfList(),
     );
   }
 }
-
-
 
 //Old code
 // class ResourceCenterPage extends StatefulWidget {
