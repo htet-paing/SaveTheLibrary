@@ -43,9 +43,9 @@ class _SettingPageState extends State<SettingPage> {
 
   void changeColor() {
     DynamicTheme.of(context).setThemeData(ThemeData(
-      primaryColor: Theme.of(context).primaryColor == Colors.blue
+      primaryColor: Theme.of(context).primaryColor == Colors.teal
           ?Colors.green
-          : Colors.blue
+          : Colors.teal
     ));
   }
 }

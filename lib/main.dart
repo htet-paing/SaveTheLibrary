@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       child: DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.teal,
           brightness: brightness
         ),
         themedWidgetBuilder: (context,theme){
