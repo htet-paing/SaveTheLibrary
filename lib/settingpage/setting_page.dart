@@ -14,30 +14,22 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         title: Text('Setting'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: ListView(
           children: <Widget>[
-            RaisedButton(
-              onPressed: chageBrightness,
-              child: Text('Change brightness'),
+            ListTile(
+              onTap: showChooser,
+              leading: Icon(Icons.brightness_2),
+              title: Text('Dark mode'),
             ),
-
-            RaisedButton(
-              onPressed: changeColor,
-              child: Text('Change color'),
-            )
+            Divider(),
+            ListTile(
+              onTap: changeColor,
+              leading: Icon(Icons.color_lens),
+              title: Text('Theme Color'),
+            ),
           ],
         ),
-      ),
-    );
-  }
 
-  void chageBrightness() {
-    DynamicTheme.of(context).setBrightness(
-      Theme.of(context).brightness == Brightness.dark
-          ? Brightness.light
-          :Brightness.dark
     );
   }
 
@@ -47,5 +39,16 @@ class _SettingPageState extends State<SettingPage> {
           ?Colors.green
           : Colors.teal
     ));
+  }
+
+  void showChooser() {
+    showDialog(context: context,
+    builder: (context){
+      return BrightnessSwitcherDialog(
+        onSelectedTheme: (brightness){
+          DynamicTheme.of(context).setBrightness(brightness);
+        },
+      );
+    });
   }
 }
