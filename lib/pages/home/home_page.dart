@@ -6,8 +6,7 @@ import 'package:save_the_library/pages/home/views/news/news_view.dart';
 import 'package:save_the_library/pages/home/views/resource_center/resource_center_view.dart';
 import 'package:save_the_library/pages/home/views/view_widget.dart';
 import 'package:save_the_library/pages/home/views/resource_center/components/pdf_list.dart';
-
-import '../../settingpage/setting_page.dart';
+import 'package:save_the_library/pages/settingpage/setting_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override

@@ -20,7 +20,9 @@ class PdfView extends StatelessWidget implements ViewWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PdfList();
+    return Scaffold(
+      body: PdfList(),
+    );
   }
 }
 
