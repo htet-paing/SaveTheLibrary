@@ -30,6 +30,7 @@ class VideoList extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
       return VideosDetailPage(
         youtubeId: videos.youtubeId,
+        postSlug: videos.postSlug,
       );
     }));
   }

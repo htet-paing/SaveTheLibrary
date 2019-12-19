@@ -36,9 +36,8 @@ class _BooksViewState extends State<BooksView> {
       length: _widgetList.length,
       child: Scaffold(
         appBar: TabBar(
-          labelColor: Colors.teal,
           unselectedLabelColor: Colors.grey,
-          indicatorColor: Colors.teal,
+          indicatorColor: Theme.of(context).primaryColor,
           tabs: [
             Tab(icon: Text("Books")),
             Tab(icon: Text("Authors")),

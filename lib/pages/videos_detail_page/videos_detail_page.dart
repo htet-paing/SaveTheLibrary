@@ -2,7 +2,6 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/video/built_video_detail.dart';
-import 'package:save_the_library/models/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -54,13 +53,7 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text(
-            'Videos Detail',
-            style: TextStyle(color: Colors.black),
-          ),
+          title: Text('Videos Detail',),
         ),
         body: NoConnectionHandler(
           builder: (context) => FutureBuilder<Response<BuiltVideoDetail>>(
