@@ -678,7 +678,11 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.3.18+1"
+=======
+    version: "0.3.17"
+>>>>>>> 81b5b3c5faa4db26c100d341bc1b90e6f80fb4c3
   xml:
     dependency: transitive
     description:
@@ -701,5 +705,10 @@ packages:
     source: hosted
     version: "6.0.3+2"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.6.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.4 <2.0.0"
+=======
+  dart: ">=2.5.0 <3.0.0"
+  flutter: ">=1.10.15-pre.148 <2.0.0"
+>>>>>>> 81b5b3c5faa4db26c100d341bc1b90e6f80fb4c3
