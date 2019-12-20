@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:save_the_library/pages/developers/assets.dart';
+import 'package:save_the_library/pages/developers/information.dart';
 import 'package:save_the_library/pages/home/views/view_widget.dart';
 import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
 
@@ -37,6 +39,11 @@ class SettingView extends StatelessWidget implements ViewWidget {
           ListTile(
             leading: Icon(Icons.code),
             title: Text("Developers"),
+            onTap: () {
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ProfileSixPage(sid))
+              );
+            },
           ),
         ],
       ),
