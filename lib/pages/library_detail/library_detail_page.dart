@@ -1,8 +1,6 @@
-import 'dart:async';
 
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/library/library.dart';
 import 'components/google_map_widget.dart';
@@ -27,13 +25,7 @@ class _LibraryDetailPageState extends State<LibraryDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        centerTitle: true,
-        title: Text(
-          "Library Detail",
-          style: TextStyle(color: Colors.black87),
-        ),
-        backgroundColor: Colors.white,
+        title: Text("Library Detail",),
       ),
       body: NoConnectionHandler(
         builder: (context) => FutureBuilder<Response<BuiltLibraryDetail>>(

@@ -3,7 +3,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
-import 'package:save_the_library/pages/home/home_page.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 
 /// [SmartList] provide _pull to refresh_, _pagination_, and other additional features out-of-the-box with few configuration

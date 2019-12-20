@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/news/built_news_list.dart';
 import 'package:save_the_library/network/api_service.dart';
-import 'package:save_the_library/pages/news_detail.dart/news_detail_page.dart';
+import 'package:save_the_library/pages/news_detail/news_detail_page.dart';
 import 'package:save_the_library/widgets/smart_slider.dart';
 
 class NewsSlider extends StatefulWidget {
   NewsSlider({Key key}) : super(key: key);
-  
 
   @override
   _NewsSliderState createState() => _NewsSliderState();
@@ -36,14 +35,14 @@ class _NewsSliderState extends State<NewsSlider> {
                   child: Wrap(
                     children: <Widget>[
                       CachedNetworkImage(
-                        
                         imageUrl:
                             'https://savethelibrarymyanmar.org/images/${news.image}',
                         fit: BoxFit.fitWidth,
                       ),
                       Text('${news.postTitle}'),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       ),
                     ],
                   ),
@@ -55,7 +54,6 @@ class _NewsSliderState extends State<NewsSlider> {
                   builder: (context) => NewsDetailPage(
                     //not finished
                     newsId: 1,
-                    
                   ),
                 ),
               ),
@@ -66,7 +64,5 @@ class _NewsSliderState extends State<NewsSlider> {
     );
   }
 }
-
-
 
 //
