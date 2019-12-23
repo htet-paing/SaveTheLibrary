@@ -7,6 +7,7 @@ part 'built_book_detail.g.dart';
 
 abstract class BuiltBookDetail
     implements Built<BuiltBookDetail, BuiltBookDetailBuilder> {
+  @nullable
   @BuiltValueField(wireName: 'book_id')
   int get id;
 

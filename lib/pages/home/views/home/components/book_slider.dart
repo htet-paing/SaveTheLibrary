@@ -22,7 +22,7 @@ class _BookSliderState extends State<BookSlider> {
         child: SmartSlider( 
           //BuiltBooksList
           title: "Book Reviews",
-          onGet: (_) => Provider.of<ApiService>(context).getBooks(1),
+          onGet: (_) => Provider.of<ApiService>(context).getBooks(),
           listGetter: (body) => body.data.toList(),
           itemBuilder: (context, item) {
             BuiltBook book = item as BuiltBook;
