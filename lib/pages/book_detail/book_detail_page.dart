@@ -11,6 +11,7 @@ import 'package:html/dom.dart' as dom;
 class BookDetailPage extends StatefulWidget {
 
   final int bookId;
+  final String notes;
   final String bookName;
   final String bookAuthorName;
   final String bookCategorynameMM;
@@ -22,6 +23,7 @@ class BookDetailPage extends StatefulWidget {
   const BookDetailPage({
     Key key,@required 
     this.bookId,
+    this.notes,
     this.bookName,
     this.bookAuthorName,
     this.bookCategorynameMM,
@@ -86,36 +88,36 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     ),
                   ],
                 ),
-                // Expanded(
-                //   child: ListView(
-                //     shrinkWrap: true,
-                //     children: <Widget>[
-                //       Html(
-                //         padding: EdgeInsets.all(10.0),
-                //         data: "${snapshot.data.body.bookCategoryNameMM}",
-                //         customTextAlign: (dom.Node node) {
-                //           if (node is dom.Element) {
-                //             switch (node.localName) {
-                //               case "p":
-                //                 return TextAlign.justify;
-                //             }
-                //           }
-                //           return null;
-                //         },
-                //         customTextStyle: (dom.Node node, TextStyle baseStyle) {
-                //           if (node is dom.Element) {
-                //             switch (node.localName) {
-                //               case "p":
-                //                 return baseStyle
-                //                     .merge(TextStyle(fontFamily: 'Pyidaungsu'));
-                //             }
-                //           }
-                //           return baseStyle;
-                //         },
-                //       ),
-                //     ],
-                //   ),
-                // )
+                Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      Html(
+                        padding: EdgeInsets.all(10.0),
+                        data: "${snapshot.data.body.notes}",
+                        customTextAlign: (dom.Node node) {
+                          if (node is dom.Element) {
+                            switch (node.localName) {
+                              case "p":
+                                return TextAlign.justify;
+                            }
+                          }
+                          return null;
+                        },
+                        customTextStyle: (dom.Node node, TextStyle baseStyle) {
+                          if (node is dom.Element) {
+                            switch (node.localName) {
+                              case "p":
+                                return baseStyle
+                                    .merge(TextStyle(fontFamily: 'Pyidaungsu'));
+                            }
+                          }
+                          return baseStyle;
+                        },
+                      ),
+                    ],
+                  ),
+                )
               ]);
 //              return Center(
 //                child: Text(snapshot.data.body.postTitle),
