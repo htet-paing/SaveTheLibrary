@@ -19,10 +19,13 @@ class _$BuiltBookDetailSerializer
   @override
   Iterable<Object> serialize(Serializers serializers, BuiltBookDetail object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'book_id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
-    ];
+    final result = <Object>[];
+    if (object.id != null) {
+      result
+        ..add('book_id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(int)));
+    }
     if (object.bookName != null) {
       result
         ..add('book_name')
@@ -230,11 +233,7 @@ class _$BuiltBookDetail extends BuiltBookDetail {
       this.featureImagePath,
       this.thumbImagePath,
       this.media})
-      : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('BuiltBookDetail', 'id');
-    }
-  }
+      : super._();
 
   @override
   BuiltBookDetail rebuild(void Function(BuiltBookDetailBuilder) updates) =>

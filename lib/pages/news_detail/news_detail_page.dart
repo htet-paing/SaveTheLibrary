@@ -43,16 +43,16 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                 Container(
                   child: Image.network(
                     'https://savethelibrarymyanmar.org/images/${snapshot.data.body.image}',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     width: 1000.0,
-                    height: 200.0,
+                    height: 300.0,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    "Myanmar Story Teller's Forum စိန်ရတုခန်းမ။ ရန်ကုန်တက္ကသိုလ် မနက် ၈နာရီခွဲ",
-                    style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 17.0),
+                    "${snapshot.data.body.postTitle}",
+                    style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 17.0, color: Colors.indigo),
                   ),
                 ),
                 Row(
