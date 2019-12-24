@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:chopper/chopper.dart';
 import 'package:http/io_client.dart' as http;
+import 'package:save_the_library/models/network_failure_exception.dart';
 import 'package:save_the_library/network/built_value_converter.dart';
 import 'package:save_the_library/network/interceptors/api_header_interceptor.dart';
-import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
 
 import 'package:save_the_library/models/book/book.dart';
 import 'package:save_the_library/models/built_app_version.dart';
@@ -19,6 +19,19 @@ part 'api_service.chopper.dart';
 
 @ChopperApi(baseUrl: "/")
 abstract class ApiService extends ChopperService {
+  static Future<T> fetch<T>(Future<T> Function() dataGetter) async {
+    try {
+      final responseBody = await dataGetter();
+      return responseBody;
+    } on SocketException {
+      throw NoConnectionException();
+    } on HttpException {
+      throw Http404Exception();
+    } on FormatException {
+      throw BadResponseException();
+    }
+  }
+
   // Books
   @Get(path: 'get-books')
   Future<Response<BuiltBookList>> getBooks([@Query() int page]);
@@ -113,7 +126,6 @@ abstract class ApiService extends ChopperService {
       converter: BuiltValueConverter(),
       interceptors: [
         HttpLoggingInterceptor(),
-        InternetConnectionInterceptor(),
         ApiHeaderInterceptor(),
       ],
       client: http.IOClient(

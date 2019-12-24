@@ -27,7 +27,7 @@ class _NoConnectionHandlerState extends State<NoConnectionHandler> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ConnectivityState>(
+    return Consumer<ConnectivityChangeNotifier>(
       builder: (_, connectivityState, __) {
         if (connectivityState.state == ConnectivityResult.none &&
             this._widgetStatus == WidgetStatus.idle) {
@@ -64,8 +64,8 @@ class NoConnectionWidget extends StatelessWidget {
               color: Colors.red,
               size: 40,
             ),
-            Text('No Connection', style: TextStyle(fontSize: 20,
-            color: Colors.black)),
+            Text('No Connection',
+                style: TextStyle(fontSize: 20, color: Colors.black)),
           ],
         ),
       ),

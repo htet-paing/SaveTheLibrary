@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_library/pages/home/views/books/books_view.dart';
-import 'package:save_the_library/pages/home/views/home/home_view.dart';
-import 'package:save_the_library/pages/home/views/libraries/libraries_view.dart';
-import 'package:save_the_library/pages/home/views/news/news_view.dart';
-import 'package:save_the_library/pages/home/views/setting/setting_view.dart';
-import 'package:save_the_library/pages/home/views/view_widget.dart';
+import 'package:save_the_library/pages/home/bottom_views/books/books_view.dart';
+import 'package:save_the_library/pages/home/bottom_views/home/home_view.dart';
+import 'package:save_the_library/pages/home/bottom_views/libraries/libraries_view.dart';
+import 'package:save_the_library/pages/home/bottom_views/news/news_view.dart';
+import 'package:save_the_library/pages/home/bottom_views/setting/setting_view.dart';
+import 'package:save_the_library/pages/home/bottom_views/bottom_view_widget.dart';
 import 'package:save_the_library/pages/setting_page/setting_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -18,8 +18,8 @@ class _MyHomePageState extends State<MyHomePage>
   List<Key> _viewKeys;
   List<AnimationController> _viewAnimators;
 
-  /// every widget in viewList need to implement [ViewWidget] which provide _title_ and _icon_ required for creating [BottomNavigationItem]
-  List<ViewWidget> _viewList = [
+  /// every widget in viewList need to implement [BottomViewWidget] which provide _title_ and _icon_ required for creating [BottomNavigationItem]
+  List<BottomViewWidget> _viewList = [
     HomeView(),
     NewsView(),
     LibrariesView(),
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage>
           top: false,
           child: Stack(
             fit: StackFit.expand,
-            children: _viewList.map((ViewWidget view) {
+            children: _viewList.map((BottomViewWidget view) {
               // config for transition animation
               int viewIndex = _viewList.indexOf(view);
               AnimationController viewAnimator = _viewAnimators[viewIndex];

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             dispose: (_, apiService) => apiService.dispose(),
           ),
           ChangeNotifierProvider(
-            create: (_) => ConnectivityState(),
+            create: (_) => ConnectivityChangeNotifier(),
           ),
         ],
         child: DynamicTheme(

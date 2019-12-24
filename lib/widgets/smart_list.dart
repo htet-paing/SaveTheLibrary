@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_library/network/interceptors/internet_connection_interceptor.dart';
+import 'package:save_the_library/models/network_failure_exception.dart';
 import 'package:save_the_library/widgets/type_def.dart';
 
 /// [SmartList] provide _pull to refresh_, _pagination_, and other additional features out-of-the-box with few configuration
@@ -70,6 +70,10 @@ class SmartList<T> extends StatefulWidget {
   /// ```
   final ItemBuilder itemBuilder;
 
+  final List items;
+
+  final void Function(T body) onLoaded;
+
   /// _true_ by default
   final bool enablePullUp;
 
@@ -78,42 +82,39 @@ class SmartList<T> extends StatefulWidget {
 
   SmartList({
     Key key,
-    @required this.onGet,
-    @required this.listGetter,
+    this.onGet,
+    this.onLoaded,
+    this.listGetter,
     @required this.itemBuilder,
+    @required this.items,
     this.enablePullUp = true,
-    this.enablePullDown = true,
+    this.enablePullDown = false,
   }) : super(key: key);
 
   @override
-  _SmartListState createState() => _SmartListState<T>(
-        this.onGet,
-        this.listGetter,
-      );
+  _SmartListState createState() =>
+      _SmartListState<T>(this.onGet, this.onLoaded);
 }
 
 class _SmartListState<T> extends State<SmartList>
-    with TickerProviderStateMixin<SmartList> {
+    with
+        TickerProviderStateMixin<SmartList>,
+        AutomaticKeepAliveClientMixin<SmartList> {
   OnGet<T> _onGet;
-  ListGetter<T> _listGetter;
+  void Function(T body) _onLoaded;
 
-  _SmartListState(
-    this._onGet,
-    this._listGetter,
-  );
+  _SmartListState(this._onGet, this._onLoaded);
 
   RefreshController _refreshController;
   ScrollController _scrollController;
-  int _currentPage;
-  List<dynamic> _itemList = [];
+  int _currentPage = 1;
   AnimationController _fabAnimationController;
 
   @override
   void initState() {
-    _refreshController = RefreshController(
-      initialRefresh: true,
-      initialRefreshStatus: RefreshStatus.refreshing,
-    );
+    super.initState();
+
+    _refreshController = RefreshController();
 
     _scrollController = ScrollController();
 
@@ -129,11 +130,11 @@ class _SmartListState<T> extends State<SmartList>
         _fabAnimationController.reverse();
       }
     });
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Stack(
       // for stacking floating actoin button
       children: <Widget>[
@@ -148,9 +149,9 @@ class _SmartListState<T> extends State<SmartList>
           onLoading: _onLoading,
           child: ListView.builder(
             controller: _scrollController,
-            itemCount: _itemList.length,
+            itemCount: this.widget.items.length,
             itemBuilder: (BuildContext context, int index) {
-              return this.widget.itemBuilder(context, this._itemList[index]);
+              return this.widget.itemBuilder(context, this.widget.items[index]);
             },
           ),
         ),
@@ -185,7 +186,7 @@ class _SmartListState<T> extends State<SmartList>
       if (response.statusCode == 200) {
         if (this.mounted) {
           setState(() {
-            _itemList = this._listGetter(response.body);
+            // _itemList = this._listGetter(response.body);
             _currentPage = 1;
             _refreshController.refreshCompleted();
           });
@@ -193,7 +194,7 @@ class _SmartListState<T> extends State<SmartList>
       } else {
         _refreshController.refreshFailed();
       }
-    } on NoConnectionException {
+    } on NetworkFailure {
       _refreshController.refreshFailed();
       Scaffold.of(context).showSnackBar(
         SnackBar(
@@ -212,18 +213,14 @@ class _SmartListState<T> extends State<SmartList>
   void _onLoading() async {
     try {
       Response<T> response = await this._onGet(_currentPage + 1);
-      if (response.statusCode == 200) {
-        if (this.mounted) {
-          setState(() {
-            _itemList.addAll(this._listGetter(response.body));
-            _currentPage++;
-            _refreshController.loadComplete();
-          });
-        }
-      } else {
-        _refreshController.loadFailed();
+      if (this.mounted) {
+        this._onLoaded(response.body);
+        setState(() {
+          _currentPage++;
+          _refreshController.loadComplete();
+        });
       }
-    } on NoConnectionException {
+    } on NetworkFailure {
       _refreshController.loadFailed();
     }
   }
@@ -234,4 +231,7 @@ class _SmartListState<T> extends State<SmartList>
     _scrollController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true; // to maintain ListView state
 }

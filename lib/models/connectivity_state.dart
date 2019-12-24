@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 
-class ConnectivityState extends ChangeNotifier {
+class ConnectivityChangeNotifier extends ChangeNotifier {
   ConnectivityResult state;
   StreamSubscription<ConnectivityResult> connectionSub;
 
-  ConnectivityState() {
+  ConnectivityChangeNotifier() {
     updateConnectionState();
     connectionSub = Connectivity().onConnectivityChanged.listen((result) {
       state = result;
