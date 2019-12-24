@@ -5,6 +5,7 @@ import 'package:save_the_library/models/pdf/pdf.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/book_detail/book_detail_page.dart';
 import 'package:save_the_library/pages/home/bottom_views/home/home_view_model.dart';
+import 'package:save_the_library/pages/resource_center/resource_center_page.dart';
 import 'package:save_the_library/widgets/horizontal_slider.dart';
 import 'package:save_the_library/widgets/smart_slider.dart';
 
@@ -50,10 +51,7 @@ class _ResourceSliderState extends State<ResourceSlider> {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BookDetailPage(
-                        //not finished
-                        bookId: pdfInfo.pdfId,
-                      ),
+                      builder: (context) => ResourceCenterPage(),
                     ),
                   ),
                 );
