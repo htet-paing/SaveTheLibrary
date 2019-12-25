@@ -2,8 +2,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-import 'package:save_the_library/models/built_media.dart';
-import 'package:save_the_library/models/generics.dart';
+import 'package:save_the_library/models/api/built_media.dart';
+import 'package:save_the_library/models/api/generics.dart';
 
 part 'built_book_author_list.g.dart';
 

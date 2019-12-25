@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/video/built_video_list.dart';
+import 'package:save_the_library/models/api/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import '../news_view_model.dart';
 import 'video_item.dart';

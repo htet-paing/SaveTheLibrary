@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/library/built_library_list.dart';
+import 'package:save_the_library/models/api/library/built_library_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/home/bottom_views/libraries/libraries_view_model.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';

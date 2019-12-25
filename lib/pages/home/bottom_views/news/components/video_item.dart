@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_library/models/video/built_video_list.dart';
+import 'package:save_the_library/models/api/video/built_video_list.dart';
 import 'package:save_the_library/pages/videos_detail_page/videos_detail_page.dart';
 
 class VideoItem extends StatelessWidget {

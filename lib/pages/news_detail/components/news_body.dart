@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_the_library/models/news/news.dart';
+import 'package:save_the_library/models/api/news/news.dart';
 
 class NewsBody extends StatelessWidget {
   

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/book/built_book_list.dart';
+import 'package:save_the_library/models/api/book/built_book_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/home/bottom_views/books/books_view_model.dart';
 import 'book_item.dart';
@@ -18,7 +18,8 @@ class BookList extends StatelessWidget {
           items: booksViewModel.bookList,
           onGet: (page) => ApiService.fetch(() => apiService.getBooks(page)),
           onLoaded: (body) {
-            booksViewModel.setBookList(booksViewModel.bookList + body.data.toList());
+            booksViewModel
+                .setBookList(booksViewModel.bookList + body.data.toList());
           },
           itemBuilder: (context, item) {
             BuiltBook book = item as BuiltBook;

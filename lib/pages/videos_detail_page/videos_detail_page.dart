@@ -1,7 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/video/built_video_detail.dart';
+import 'package:save_the_library/models/api/video/built_video_detail.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -10,10 +10,8 @@ class VideosDetailPage extends StatefulWidget {
   final String youtubeId;
   final String postSlug;
 
-  VideosDetailPage({
-      @required this.postSlug,
-      @required this.youtubeId,
-      Key key}): super(key: key);
+  VideosDetailPage({@required this.postSlug, @required this.youtubeId, Key key})
+      : super(key: key);
 
   @override
   _VideosDetailPageState createState() => _VideosDetailPageState();
@@ -53,7 +51,9 @@ class _VideosDetailPageState extends State<VideosDetailPage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text('Videos Detail',),
+          title: Text(
+            'Videos Detail',
+          ),
         ),
         body: NoConnectionHandler(
           builder: (context) => FutureBuilder<Response<BuiltVideoDetail>>(

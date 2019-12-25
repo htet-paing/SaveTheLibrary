@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/news/news.dart';
+import 'package:save_the_library/models/api/news/news.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:html/dom.dart' as dom;
@@ -52,7 +52,10 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                   padding: EdgeInsets.all(10.0),
                   child: Text(
                     "${snapshot.data.body.postTitle}",
-                    style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 17.0, color: Colors.indigo),
+                    style: TextStyle(
+                        fontFamily: 'Pyidaungsu',
+                        fontSize: 17.0,
+                        color: Colors.indigo),
                   ),
                 ),
                 Row(

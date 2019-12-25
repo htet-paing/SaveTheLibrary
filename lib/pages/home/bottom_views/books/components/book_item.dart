@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_library/models/book/book.dart';
+import 'package:save_the_library/models/api/book/book.dart';
 
 class BookItem extends StatelessWidget {
   final BuiltBook book;

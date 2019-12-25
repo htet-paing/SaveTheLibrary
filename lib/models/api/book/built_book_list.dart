@@ -1,15 +1,45 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:save_the_library/models/built_media.dart';
+import 'package:save_the_library/models/api/generics.dart';
+import 'package:save_the_library/models/api/built_media.dart';
 
-part 'built_book_detail.g.dart';
+part 'built_book_list.g.dart';
 
-abstract class BuiltBookDetail
-    implements Built<BuiltBookDetail, BuiltBookDetailBuilder> {
-  @nullable
-  @BuiltValueField(wireName: 'book_id')
+/// sample
+///
+/// [BuiltBookList] ( implements [GenericList] )
+/// {
+///   total: ...,
+///   per_page: ...,
+///   current_page: ...,
+///   .
+///   .
+///   .
+///   data: [
+///     [BulitBook],
+///     [BuiltBook],
+///     [BuiltBook],...
+///   ]
+/// }
+
+abstract class BuiltBookList
+    implements GenericList, Built<BuiltBookList, BuiltBookListBuilder> {
+  @override
+  BuiltList<BuiltBook> get data;
+
+  BuiltBookList._();
+
+  factory BuiltBookList([updates(BuiltBookListBuilder b)]) = _$BuiltBookList;
+
+  static Serializer<BuiltBookList> get serializer => _$builtBookListSerializer;
+}
+
+abstract class BuiltBook implements Built<BuiltBook, BuiltBookBuilder> {
   int get id;
+
+  @nullable
+  String get title;
 
   @nullable
   @BuiltValueField(wireName: 'book_name')
@@ -63,11 +93,9 @@ abstract class BuiltBookDetail
   @nullable
   BuiltList<BuiltMedia> get media;
 
-  BuiltBookDetail._();
+  BuiltBook._();
 
-  factory BuiltBookDetail([updates(BuiltBookDetailBuilder b)]) =
-      _$BuiltBookDetail;
+  factory BuiltBook([updates(BuiltBookBuilder b)]) = _$BuiltBook;
 
-  static Serializer<BuiltBookDetail> get serializer =>
-      _$builtBookDetailSerializer;
+  static Serializer<BuiltBook> get serializer => _$builtBookSerializer;
 }

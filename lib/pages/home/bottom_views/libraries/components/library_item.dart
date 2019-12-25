@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:save_the_library/models/library/library.dart';
+import 'package:save_the_library/models/api/library/library.dart';
 import 'package:save_the_library/pages/library_detail/library_detail_page.dart';
 
 class LibraryItem extends StatelessWidget {

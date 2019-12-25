@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/pdf/pdf.dart';
+import 'package:save_the_library/models/api/pdf/pdf.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:html/dom.dart' as dom;
@@ -17,17 +17,17 @@ class PdfListPage extends StatefulWidget {
   final String categoryMM;
   final String categoryEN;
 
-  PdfListPage({
-    @required 
-    this.pdfId,
-    this.pdfTitle,
-    this.downloadLink,
-    this.pdfSource,
-    this.featureImagePath,
-    this.categoryMM,
-    this.categoryEN,
-    Key key}) : super(key: key);
-    @override
+  PdfListPage(
+      {@required this.pdfId,
+      this.pdfTitle,
+      this.downloadLink,
+      this.pdfSource,
+      this.featureImagePath,
+      this.categoryMM,
+      this.categoryEN,
+      Key key})
+      : super(key: key);
+  @override
   _PdfListPageState createState() => _PdfListPageState();
 }
 
@@ -40,8 +40,7 @@ class _PdfListPageState extends State<PdfListPage> {
       ),
       body: NoConnectionHandler(
         builder: (context) => FutureBuilder<Response<BuiltPdfList>>(
-          future: Provider.of<ApiService>(context)
-              .getPdfs(this.widget.pdfId),
+          future: Provider.of<ApiService>(context).getPdfs(this.widget.pdfId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Column(children: <Widget>[
@@ -128,13 +127,6 @@ class _PdfListPageState extends State<PdfListPage> {
 }
 // end here
 
-
-
-
-
-
-
-
 // class PdfListPage extends StatefulWidget {
 
 //   final int pdfId;
@@ -146,7 +138,7 @@ class _PdfListPageState extends State<PdfListPage> {
 //   final String categoryEN;
 
 //   PdfListPage({
-//     @required 
+//     @required
 //     this.pdfId,
 //     this.pdfTitle,
 //     this.downloadLink,
@@ -164,7 +156,7 @@ class _PdfListPageState extends State<PdfListPage> {
 
 //   @override
 //   Widget build(BuildContext context) {
-  
+
 //     return Scaffold(
 //       appBar: AppBar(
 //         iconTheme: IconThemeData(color: Colors.black),
@@ -180,13 +172,13 @@ class _PdfListPageState extends State<PdfListPage> {
 //           future: Provider.of<ApiService>(context).getPdfs(),
 //           builder: (context, snapshot) {
 //             if(snapshot.connectionState == ConnectionState.done){
-              
+
 //               BuiltPdfList pdfList = snapshot.data.body;
 
 //               return GridView(
 //                 children: <Widget>[
 //                   GridView.builder(
-    
+
 //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
 //     itemBuilder: (context, index) {
 //       return Image.network("https://savethelibrarymyanmar.org/images/${snapshot.data.body}",
@@ -201,12 +193,8 @@ class _PdfListPageState extends State<PdfListPage> {
 //         ),
 //       ),
 //     );
-//   } 
+//   }
 // }
 
-
 ///
 ///
-
-
-

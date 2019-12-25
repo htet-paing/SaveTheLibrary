@@ -3,13 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/book/book.dart';
+import 'package:save_the_library/models/api/book/book.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:html/dom.dart' as dom;
 
 class BookDetailPage extends StatefulWidget {
-
   final int bookId;
   final String notes;
   final String bookName;
@@ -20,18 +19,18 @@ class BookDetailPage extends StatefulWidget {
   final String featureImagePath;
   final String thumbImagePath;
 
-  const BookDetailPage({
-    Key key,@required 
-    this.bookId,
-    this.notes,
-    this.bookName,
-    this.bookAuthorName,
-    this.bookCategorynameMM,
-    this.bookCateogrynameEN,
-    this.bookPublisherAddress,
-    this.featureImagePath,
-    this.thumbImagePath
-    }) : super(key: key);
+  const BookDetailPage(
+      {Key key,
+      @required this.bookId,
+      this.notes,
+      this.bookName,
+      this.bookAuthorName,
+      this.bookCategorynameMM,
+      this.bookCateogrynameEN,
+      this.bookPublisherAddress,
+      this.featureImagePath,
+      this.thumbImagePath})
+      : super(key: key);
 
   @override
   _BookDetailPageState createState() => _BookDetailPageState();
@@ -57,14 +56,16 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     fit: BoxFit.contain,
                     width: 1000.0,
                     height: 300.0,
-                    
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
                     "${snapshot.data.body.bookName}",
-                    style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 17.0, color: Colors.indigo),
+                    style: TextStyle(
+                        fontFamily: 'Pyidaungsu',
+                        fontSize: 17.0,
+                        color: Colors.indigo),
                   ),
                 ),
                 Row(

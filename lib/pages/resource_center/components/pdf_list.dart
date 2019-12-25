@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/pdf/built_pdf_list.dart';
+import 'package:save_the_library/models/api/pdf/built_pdf_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 import 'package:save_the_library/widgets/smart_list.dart';

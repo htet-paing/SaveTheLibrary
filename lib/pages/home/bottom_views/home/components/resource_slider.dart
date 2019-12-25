@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/pdf/pdf.dart';
+import 'package:save_the_library/models/api/pdf/pdf.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/book_detail/book_detail_page.dart';
 import 'package:save_the_library/pages/home/bottom_views/home/home_view_model.dart';

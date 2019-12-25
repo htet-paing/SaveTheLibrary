@@ -1,8 +1,7 @@
-
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/library/library.dart';
+import 'package:save_the_library/models/api/library/library.dart';
 import 'components/google_map_widget.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';
 
@@ -25,7 +24,9 @@ class _LibraryDetailPageState extends State<LibraryDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Library Detail",),
+        title: Text(
+          "Library Detail",
+        ),
       ),
       body: NoConnectionHandler(
         builder: (context) => FutureBuilder<Response<BuiltLibraryDetail>>(

@@ -1,5 +1,5 @@
 import 'package:save_the_library/models/base_model.dart';
-import 'package:save_the_library/models/book/book.dart';
+import 'package:save_the_library/models/api/book/book.dart';
 import 'package:save_the_library/models/network_failure_exception.dart';
 import 'package:save_the_library/network/api_service.dart';
 

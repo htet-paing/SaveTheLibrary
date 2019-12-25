@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:save_the_library/models/library/library.dart';
+import 'package:save_the_library/models/api/library/library.dart';
 
 class LibraryDetailBody extends StatelessWidget {
   

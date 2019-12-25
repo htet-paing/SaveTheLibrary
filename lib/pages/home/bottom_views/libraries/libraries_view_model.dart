@@ -1,6 +1,6 @@
 import 'package:save_the_library/models/base_model.dart';
-import 'package:save_the_library/models/division/built_division.dart';
-import 'package:save_the_library/models/library/library.dart';
+import 'package:save_the_library/models/api/division/built_division.dart';
+import 'package:save_the_library/models/api/library/library.dart';
 import 'package:save_the_library/models/network_failure_exception.dart';
 import 'package:save_the_library/network/api_service.dart';
 

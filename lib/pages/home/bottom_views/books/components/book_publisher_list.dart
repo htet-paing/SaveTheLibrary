@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/book/book.dart';
+import 'package:save_the_library/models/api/book/book.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/home/bottom_views/books/books_view_model.dart';
 import 'package:save_the_library/widgets/no_connection_handler.dart';

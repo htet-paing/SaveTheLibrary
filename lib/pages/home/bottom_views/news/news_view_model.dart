@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/models/network_failure_exception.dart';
-import 'package:save_the_library/models/news/built_news_list.dart';
-import 'package:save_the_library/models/video/built_video_list.dart';
+import 'package:save_the_library/models/api/news/built_news_list.dart';
+import 'package:save_the_library/models/api/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 
 class NewsViewModel extends BaseModel {

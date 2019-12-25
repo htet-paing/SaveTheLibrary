@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:save_the_library/models/news/built_news_list.dart';
-import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/home/bottom_views/home/home_view_model.dart';
 import 'package:save_the_library/pages/news_detail/news_detail_page.dart';
 

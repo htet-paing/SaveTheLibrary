@@ -1,10 +1,10 @@
 import 'package:save_the_library/models/base_model.dart';
-import 'package:save_the_library/models/book/book.dart';
-import 'package:save_the_library/models/library/built_library_list.dart';
+import 'package:save_the_library/models/api/book/book.dart';
+import 'package:save_the_library/models/api/library/built_library_list.dart';
 import 'package:save_the_library/models/network_failure_exception.dart';
-import 'package:save_the_library/models/news/news.dart';
-import 'package:save_the_library/models/pdf/built_pdf_list.dart';
-import 'package:save_the_library/models/video/built_video_list.dart';
+import 'package:save_the_library/models/api/news/news.dart';
+import 'package:save_the_library/models/api/pdf/built_pdf_list.dart';
+import 'package:save_the_library/models/api/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 
 class HomeViewModel extends BaseModel {
