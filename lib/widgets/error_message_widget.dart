@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/models/connectivity_state.dart';
 import 'package:save_the_library/models/network_failure_exception.dart';
-import 'package:save_the_library/network/api_service.dart';
 
 class ErrorMessageWidget<T extends BaseModel> extends StatelessWidget {
   final Exception error;
@@ -34,32 +33,37 @@ class _NoConnectionWidgetState<T extends BaseModel>
     extends State<NoConnectionWidget> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<ConnectivityChangeNotifier, T>(
-      builder: (context, connectivityState, newsModel, errorWidget) {
-        if (connectivityState.state == ConnectivityResult.none) {
-          return errorWidget;
-        } else {
-          newsModel.setError(null);
-          newsModel.fetchData();
-          return Container(child: Center(child: CircularProgressIndicator()));
-        }
-      },
-      child: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                Icons.error,
-                color: Colors.red,
-                size: 40,
-              ),
-              Text('No Connection',
-                  style: TextStyle(fontSize: 20, color: Colors.black)),
-            ],
+    return Consumer<T>(
+      builder: (context, baseModel, _) {
+        return Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.error,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                Text(
+                  'No Connection',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).textTheme.title.color,
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    baseModel.setError(null);
+                    baseModel.fetchData();
+                  },
+                  child: Text('Retry'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
