@@ -23,6 +23,9 @@ class BookCategoryList extends StatelessWidget {
               booksViewModel.bookCategoryList + body.data.toList(),
             );
           },
+          stopAt: (body) {
+            return body.currentPage > body.lastPage;
+          },
           itemBuilder: (context, item) {
             BuiltBookCategory bookCategory = item as BuiltBookCategory;
             return Card(

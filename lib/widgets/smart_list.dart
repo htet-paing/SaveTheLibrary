@@ -74,6 +74,8 @@ class SmartList<T> extends StatefulWidget {
 
   final void Function(T body) onLoaded;
 
+  final bool Function(T body) stopAt;
+
   /// _true_ by default
   final bool enablePullUp;
 
@@ -84,6 +86,7 @@ class SmartList<T> extends StatefulWidget {
     Key key,
     this.onGet,
     this.onLoaded,
+    this.stopAt,
     this.listGetter,
     @required this.itemBuilder,
     @required this.items,
@@ -93,7 +96,7 @@ class SmartList<T> extends StatefulWidget {
 
   @override
   _SmartListState createState() =>
-      _SmartListState<T>(this.onGet, this.onLoaded);
+      _SmartListState<T>(this.onGet, this.onLoaded, this.stopAt);
 }
 
 class _SmartListState<T> extends State<SmartList>
@@ -102,8 +105,12 @@ class _SmartListState<T> extends State<SmartList>
         AutomaticKeepAliveClientMixin<SmartList> {
   OnGet<T> _onGet;
   void Function(T body) _onLoaded;
+  bool Function(T body) _errorOn;
 
-  _SmartListState(this._onGet, this._onLoaded);
+  _SmartListState(this._onGet, this._onLoaded, bool Function(T body) errorOn) {
+    errorOn ??= (body) => false;
+    this._errorOn = errorOn;
+  }
 
   RefreshController _refreshController;
   ScrollController _scrollController;
@@ -214,11 +221,17 @@ class _SmartListState<T> extends State<SmartList>
     try {
       Response<T> response = await this._onGet(_currentPage + 1);
       if (this.mounted) {
-        this._onLoaded(response.body);
-        setState(() {
-          _currentPage++;
-          _refreshController.loadComplete();
-        });
+        if (this._errorOn(response.body)) {
+          setState(() {
+            _refreshController.loadNoData();
+          });
+        } else {
+          this._onLoaded(response.body);
+          setState(() {
+            _currentPage++;
+            _refreshController.loadComplete();
+          });
+        }
       }
     } on NetworkFailure {
       _refreshController.loadFailed();
