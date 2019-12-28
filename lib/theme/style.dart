@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 ThemeData appTheme(Brightness brightness) {
   Color primaryColor = Colors.teal;
   return ThemeData(
+    textTheme: TextTheme(
+      subtitle: TextStyle(
+        color: Colors.grey,
+      ),
+    ),
     brightness: brightness,
     primaryColor: primaryColor,
     accentColor: primaryColor,
