@@ -34,7 +34,9 @@ class _MyHomePageState extends State<MyHomePage>
     // set animator for each view
     _viewAnimators = _viewList.map((view) {
       return AnimationController(
-          vsync: this, duration: Duration(milliseconds: 400));
+        vsync: this,
+        duration: Duration(milliseconds: 500),
+      );
     }).toList();
     _viewAnimators[_currentIndex].value = 0.0;
     _viewKeys =
@@ -63,8 +65,10 @@ class _MyHomePageState extends State<MyHomePage>
                   color: Colors.black,
                 ),
                 onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SettingPage()))
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingPage()),
+                  )
                 },
               ),
             )
@@ -81,10 +85,15 @@ class _MyHomePageState extends State<MyHomePage>
               int viewIndex = _viewList.indexOf(view);
               AnimationController viewAnimator = _viewAnimators[viewIndex];
 
-              final Widget viewWithTransition = FadeTransition(
-                opacity: viewAnimator.drive<double>(
-                  CurveTween(curve: Curves.fastOutSlowIn),
-                ),
+              // building animation
+              var begin = Offset(0.0, 1.0);
+              var end = Offset.zero;
+              var curve = Curves.easeInOut;
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+              final Widget viewWithTransition = SlideTransition(
+                position: _viewAnimators[viewIndex].drive(tween),
                 child: KeyedSubtree(
                   key: _viewKeys[viewIndex],
                   child: view,
@@ -92,10 +101,10 @@ class _MyHomePageState extends State<MyHomePage>
               );
 
               if (viewIndex == _currentIndex) {
-                viewAnimator.forward();
+                viewAnimator.forward(from: 0.5);
                 return viewWithTransition;
               } else {
-                viewAnimator.reverse();
+                viewAnimator.reverse(from: 0.0);
                 if (viewAnimator.isAnimating) {
                   return IgnorePointer(child: viewWithTransition);
                 }
@@ -112,6 +121,8 @@ class _MyHomePageState extends State<MyHomePage>
               this._currentIndex = index;
             });
           },
+          selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Theme.of(context).primaryColor,
           iconSize: 25,
           selectedFontSize: 13,
           unselectedFontSize: 13,
