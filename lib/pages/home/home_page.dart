@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             )
           ],
-          title: _viewList[_currentIndex].title,
+          title: _viewList[_currentIndex].bottomNaviBarItem.title,
           centerTitle: true,
         ),
         body: SafeArea(
@@ -112,8 +112,11 @@ class _MyHomePageState extends State<MyHomePage>
               this._currentIndex = index;
             });
           },
+          iconSize: 25,
+          selectedFontSize: 13,
+          unselectedFontSize: 13,
           items: _viewList.map((view) {
-            return BottomNavigationBarItem(icon: view.icon, title: view.title);
+            return view.bottomNaviBarItem;
           }).toList(),
         ),
       ),

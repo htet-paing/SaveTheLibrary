@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/pages/home/bottom_views/books/books_view_model.dart';
@@ -21,10 +22,11 @@ class BooksView extends StatefulWidget implements BottomViewWidget {
   _BooksViewState createState() => _BooksViewState();
 
   @override
-  Icon get icon => Icon(Icons.rate_review);
-
-  @override
-  Widget get title => Text("Reviews");
+  BottomNavigationBarItem get bottomNaviBarItem => BottomNavigationBarItem(
+        icon: Icon(OMIcons.book),
+        activeIcon: Icon(Icons.book),
+        title: Text('Books'),
+      );
 }
 
 class _BooksViewState extends State<BooksView> {

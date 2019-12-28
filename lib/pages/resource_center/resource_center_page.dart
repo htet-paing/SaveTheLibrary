@@ -16,13 +16,14 @@ class ResourceCenterPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Resource Center"),
       ),
-      body: ChangeNotifierProvider(
+      body: ChangeNotifierProvider<ResourceCenterModel>(
         create: (_) => ResourceCenterModel(),
         child: Consumer<ResourceCenterModel>(
           builder: (context, resourceCenterModel, child) {
             if (resourceCenterModel.dataState == DataState.loaded) {
               if (resourceCenterModel.error != null) {
-                return ErrorMessageWidget(error: resourceCenterModel.error);
+                return ErrorMessageWidget<ResourceCenterModel>(
+                    error: resourceCenterModel.error);
               } else {
                 return child;
               }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class BottomViewWidget extends Widget {
-  final Widget title;
-  final Icon icon;
+  final BottomNavigationBarItem bottomNaviBarItem;
 
-  BottomViewWidget(this.title, this.icon);
+  BottomViewWidget(this.bottomNaviBarItem);
 }

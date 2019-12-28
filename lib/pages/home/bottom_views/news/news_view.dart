@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/network/api_service.dart';
@@ -20,10 +21,11 @@ class NewsView extends StatefulWidget implements BottomViewWidget {
   _NewsViewState createState() => _NewsViewState();
 
   @override
-  Icon get icon => Icon(Icons.library_books);
-
-  @override
-  Widget get title => Text("News");
+  BottomNavigationBarItem get bottomNaviBarItem => BottomNavigationBarItem(
+        icon: Icon(OMIcons.libraryBooks),
+        activeIcon: Icon(Icons.library_books),
+        title: Text('News'),
+      );
 }
 
 class _NewsViewState extends State<NewsView> {

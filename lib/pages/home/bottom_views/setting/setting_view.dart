@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:save_the_library/pages/developers/assets.dart';
 import 'package:save_the_library/pages/developers/information.dart';
 import 'package:save_the_library/pages/home/bottom_views/bottom_view_widget.dart';
@@ -17,9 +18,11 @@ class SettingView extends StatelessWidget implements BottomViewWidget {
             title: Text("Resource Center"),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ResourceCenterPage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResourceCenterPage(),
+                ),
+              );
             },
           ),
           ListTile(
@@ -27,7 +30,7 @@ class SettingView extends StatelessWidget implements BottomViewWidget {
             title: Text("Dark Mode"),
             trailing: Switch(value: true, onChanged: null),
           ),
-          buildSubtitle("About Us"),
+          buildSubtitle(context, "About Us"),
           ListTile(
             leading: Icon(Icons.info),
             title: Text("Save The Library"),
@@ -40,8 +43,10 @@ class SettingView extends StatelessWidget implements BottomViewWidget {
             leading: Icon(Icons.code),
             title: Text("Developers"),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileSixPage(sid)));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileSixPage(sid)),
+              );
             },
           ),
         ],
@@ -49,18 +54,21 @@ class SettingView extends StatelessWidget implements BottomViewWidget {
     );
   }
 
-  @override
-  Icon get icon => Icon(Icons.settings);
-
-  @override
-  Widget get title => Text('Setting');
-
-  Widget buildSubtitle(String text) {
+  Widget buildSubtitle(BuildContext context, String text) {
     return ListTile(
       leading: Text(
         text,
-        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: Theme.of(context).textTheme.subtitle.color,
+            fontWeight: FontWeight.bold),
       ),
     );
   }
+
+  @override
+  BottomNavigationBarItem get bottomNaviBarItem => BottomNavigationBarItem(
+        icon: Icon(OMIcons.settings),
+        activeIcon: Icon(Icons.settings),
+        title: Text('Settings'),
+      );
 }

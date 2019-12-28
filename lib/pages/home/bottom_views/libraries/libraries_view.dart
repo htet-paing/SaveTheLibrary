@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/pages/home/bottom_views/bottom_view_widget.dart';
@@ -17,10 +18,12 @@ class LibrariesView extends StatefulWidget implements BottomViewWidget {
   @override
   _LibrariesViewState createState() => _LibrariesViewState();
 
-  Icon get icon => Icon(Icons.local_library);
-
   @override
-  Widget get title => Text("Libraries");
+  BottomNavigationBarItem get bottomNaviBarItem => BottomNavigationBarItem(
+        icon: Icon(OMIcons.localLibrary),
+        activeIcon: Icon(Icons.local_library),
+        title: Text('Libraries'),
+      );
 }
 
 @override
