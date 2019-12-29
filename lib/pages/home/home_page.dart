@@ -117,9 +117,11 @@ class _MyHomePageState extends State<MyHomePage>
           type: BottomNavigationBarType.fixed,
           currentIndex: _currentIndex,
           onTap: (index) {
-            setState(() {
-              this._currentIndex = index;
-            });
+            if (index != _currentIndex) {
+              setState(() {
+                this._currentIndex = index;
+              });
+            }
           },
           selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: Theme.of(context).primaryColor,
