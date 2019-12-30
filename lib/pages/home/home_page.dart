@@ -6,6 +6,7 @@ import 'package:save_the_library/pages/home/bottom_views/news/news_view.dart';
 import 'package:save_the_library/pages/home/bottom_views/setting/setting_view.dart';
 import 'package:save_the_library/pages/home/bottom_views/bottom_view_widget.dart';
 import 'package:save_the_library/pages/setting_page/setting_page.dart';
+import 'package:save_the_library/widgets/flutter_transitions.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage>
     _viewAnimators = _viewList.map((view) {
       return AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 400),
       );
     }).toList();
     _viewAnimators[_currentIndex].value = 0.0;
@@ -85,19 +86,9 @@ class _MyHomePageState extends State<MyHomePage>
               int viewIndex = _viewList.indexOf(view);
               AnimationController viewAnimator = _viewAnimators[viewIndex];
 
-              // building animation
-              var begin = Offset(0.0, 1.0);
-              var end = Offset.zero;
-              var curve = Curves.easeInOut;
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-              final Widget viewWithTransition = SlideTransition(
-                position: _viewAnimators[viewIndex].drive(tween),
-                child: KeyedSubtree(
-                  key: _viewKeys[viewIndex],
-                  child: view,
-                ),
+              final Widget viewWithTransition = FadeUpwardTransition(
+                routeAnimation: viewAnimator,
+                child: KeyedSubtree(key: _viewKeys[viewIndex], child: view),
               );
 
               if (viewIndex == _currentIndex) {
@@ -124,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage>
             }
           },
           selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Colors.grey,
           iconSize: 25,
           selectedFontSize: 13,
           unselectedFontSize: 13,
