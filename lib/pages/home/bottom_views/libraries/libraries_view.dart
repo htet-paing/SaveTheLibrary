@@ -31,36 +31,33 @@ class _LibrariesViewState extends State<LibrariesView> {
   List<Widget> _widgetList = [LibraryList(), LibraryState()];
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LibrariesViewModel>(
-      create: (_) => LibrariesViewModel(),
-      child: Consumer<LibrariesViewModel>(
-        builder: (context, librariesViewModel, child) {
-          if (librariesViewModel.dataState == DataState.loaded) {
-            if (librariesViewModel.error != null) {
-              return ErrorMessageWidget<LibrariesViewModel>(
-                error: librariesViewModel.error,
-              );
-            } else {
-              return child;
-            }
+    return Consumer<LibrariesViewModel>(
+      builder: (context, librariesViewModel, child) {
+        if (librariesViewModel.dataState == DataState.loaded) {
+          if (librariesViewModel.error != null) {
+            return ErrorMessageWidget<LibrariesViewModel>(
+              error: librariesViewModel.error,
+            );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return child;
           }
-        },
-        child: DefaultTabController(
-          length: _widgetList.length,
-          child: Scaffold(
-            appBar: TabBar(
-              indicatorColor: Theme.of(context).primaryColor,
-              tabs: [
-                Tab(icon: Icon(Icons.list)),
-                Tab(icon: Icon(Icons.place)),
-              ],
-            ),
-            body: TabBarView(
-              dragStartBehavior: DragStartBehavior.down,
-              children: _widgetList,
-            ),
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+      child: DefaultTabController(
+        length: _widgetList.length,
+        child: Scaffold(
+          appBar: TabBar(
+            indicatorColor: Theme.of(context).primaryColor,
+            tabs: [
+              Tab(icon: Icon(Icons.list)),
+              Tab(icon: Icon(Icons.place)),
+            ],
+          ),
+          body: TabBarView(
+            dragStartBehavior: DragStartBehavior.down,
+            children: _widgetList,
           ),
         ),
       ),

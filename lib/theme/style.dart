@@ -25,14 +25,12 @@ ThemeData appTheme(Brightness brightness) {
       unselectedLabelColor: Colors.grey,
     ),
     appBarTheme: AppBarTheme(
-      color: primaryColor,
       elevation: 2.0,
-      iconTheme: IconThemeData(color: Colors.white),
       textTheme: TextTheme(
         title: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: brightness == Brightness.light ? Colors.black : Colors.white,
         ),
       ),
     ),

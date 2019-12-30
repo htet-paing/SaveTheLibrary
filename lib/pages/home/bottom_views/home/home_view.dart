@@ -32,35 +32,32 @@ class HomeView extends StatefulWidget implements BottomViewWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<HomeViewModel>(
-      create: (_) => HomeViewModel(),
-      child: Consumer<HomeViewModel>(
-        builder: (context, homeViewModel, child) {
-          if (homeViewModel.dataState == DataState.loaded) {
-            if (homeViewModel.error != null) {
-              return ErrorMessageWidget<HomeViewModel>(
-                  error: homeViewModel.error);
-            } else {
-              return child;
-            }
+    return Consumer<HomeViewModel>(
+      builder: (context, homeViewModel, child) {
+        if (homeViewModel.dataState == DataState.loaded) {
+          if (homeViewModel.error != null) {
+            return ErrorMessageWidget<HomeViewModel>(
+                error: homeViewModel.error);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return child;
           }
-        },
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            NewsCarousel(),
-            SizedBox(height: 30.0),
-            BookSlider(),
-            SizedBox(height: 30.0),
-            ResourceSlider(),
-            SizedBox(height: 30.0),
-            LibrarySlider(),
-            SizedBox(height: 30.0),
-            VideosSliderWidget()
-          ],
-        ),
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          NewsCarousel(),
+          SizedBox(height: 30.0),
+          BookSlider(),
+          SizedBox(height: 30.0),
+          ResourceSlider(),
+          SizedBox(height: 30.0),
+          LibrarySlider(),
+          SizedBox(height: 30.0),
+          VideosSliderWidget()
+        ],
       ),
     );
   }

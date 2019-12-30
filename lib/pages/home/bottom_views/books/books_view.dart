@@ -39,37 +39,34 @@ class _BooksViewState extends State<BooksView> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<BooksViewModel>(
-      create: (_) => BooksViewModel(),
-      child: Consumer<BooksViewModel>(
-        builder: (context, booksViewModel, child) {
-          if (booksViewModel.dataState == DataState.loaded) {
-            if (booksViewModel.error != null) {
-              return ErrorMessageWidget<BooksViewModel>(
-                  error: booksViewModel.error);
-            } else {
-              return child;
-            }
+    return Consumer<BooksViewModel>(
+      builder: (context, booksViewModel, child) {
+        if (booksViewModel.dataState == DataState.loaded) {
+          if (booksViewModel.error != null) {
+            return ErrorMessageWidget<BooksViewModel>(
+                error: booksViewModel.error);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return child;
           }
-        },
-        child: DefaultTabController(
-          length: _widgetList.length,
-          child: Scaffold(
-            appBar: TabBar(
-              indicatorColor: Theme.of(context).primaryColor,
-              tabs: [
-                Tab(icon: Text("Books")),
-                Tab(icon: Text("Authors")),
-                Tab(icon: Text("Category")),
-                Tab(icon: Text("Publisher")),
-              ],
-            ),
-            body: TabBarView(
-              dragStartBehavior: DragStartBehavior.down,
-              children: _widgetList,
-            ),
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+      child: DefaultTabController(
+        length: _widgetList.length,
+        child: Scaffold(
+          appBar: TabBar(
+            indicatorColor: Theme.of(context).primaryColor,
+            tabs: [
+              Tab(icon: Text("Books")),
+              Tab(icon: Text("Authors")),
+              Tab(icon: Text("Category")),
+              Tab(icon: Text("Publisher")),
+            ],
+          ),
+          body: TabBarView(
+            dragStartBehavior: DragStartBehavior.down,
+            children: _widgetList,
           ),
         ),
       ),

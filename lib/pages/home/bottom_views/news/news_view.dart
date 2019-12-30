@@ -33,33 +33,30 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<NewsViewModel>(
-      create: (context) => NewsViewModel(),
-      child: Consumer<NewsViewModel>(
-        builder: (_, newsModel, child) {
-          if (newsModel.dataState == DataState.loaded) {
-            if (newsModel.error != null) {
-              return ErrorMessageWidget<NewsViewModel>(error: newsModel.error);
-            } else {
-              return DefaultTabController(
-                length: _widgetList.length,
-                child: Scaffold(
-                  appBar: TabBar(
-                    indicatorColor: Colors.teal,
-                    tabs: [
-                      Tab(icon: Text("Events")),
-                      Tab(icon: Text("Videos")),
-                    ],
-                  ),
-                  body: TabBarView(children: _widgetList),
-                ),
-              );
-            }
+    return Consumer<NewsViewModel>(
+      builder: (_, newsModel, child) {
+        if (newsModel.dataState == DataState.loaded) {
+          if (newsModel.error != null) {
+            return ErrorMessageWidget<NewsViewModel>(error: newsModel.error);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return DefaultTabController(
+              length: _widgetList.length,
+              child: Scaffold(
+                appBar: TabBar(
+                  indicatorColor: Colors.teal,
+                  tabs: [
+                    Tab(icon: Text("Events")),
+                    Tab(icon: Text("Videos")),
+                  ],
+                ),
+                body: TabBarView(children: _widgetList),
+              ),
+            );
           }
-        },
-      ),
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
