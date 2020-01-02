@@ -12,62 +12,76 @@ import 'network/api_service.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  Future<SharedPreferences> _getSliderState() async {
-    final pref = await SharedPreferences.getInstance();
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-    await pref.get('sliderState') ?? await pref.setBool('sliderState', true);
-    return pref;
+class _MyAppState extends State<MyApp> {
+  SharedPreferences _sharedPref;
+
+  @override
+  void initState() {
+    super.initState();
+    _getSharedPref().then((sharedPref) {
+      this._sharedPref = sharedPref;
+    });
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          Provider<ApiService>(
-            create: (_) => ApiService
-                .create(), // builder is deprecated in new version. use create instead
-            dispose: (_, apiService) => apiService.dispose(),
-          ),
-          ChangeNotifierProvider(
-            create: (_) => ConnectivityChangeNotifier(),
-          ),
-        ],
-        child: DynamicTheme(
-          defaultBrightness: Brightness.light,
-          // use appTheme() which config color setting to widgets
-          data: (brightness) => appTheme(brightness),
-          themedWidgetBuilder: (context, theme) {
-            return MaterialApp(
-              title: 'Flutter Demo',
-              theme: theme,
-              home: FutureBuilder<SharedPreferences>(
-                future: _getSliderState(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data.getBool('sliderState') == true) {
-                      return MyIntroSlider();
-                    } else {
-                      return MyHomePage();
-                    }
+      providers: [
+        Provider<ApiService>(
+          create: (_) => ApiService
+              .create(), // builder is deprecated in new version. use create instead
+          dispose: (_, apiService) => apiService.dispose(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ConnectivityChangeNotifier(),
+        ),
+      ],
+      child: DynamicTheme(
+        defaultBrightness: Brightness.light,
+        // use appTheme() which config color setting to widgets
+        data: (brightness) => appTheme(brightness),
+        themedWidgetBuilder: (context, theme) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: theme,
+            home: Builder(
+              builder: (context) {
+                if (_sharedPref == null) {
+                  return Container(
+                    color: Colors.white,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  if (_sharedPref.getBool('sliderState') == true) {
+                    return MyIntroSlider();
                   } else {
-                    return Container(
-                      color: Colors.white,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
+                    return MyHomePage();
                   }
-                },
-              ),
-              routes: <String, WidgetBuilder>{
-                "/home": (BuildContext context) => MyHomePage(),
-                // "/resources": (BuildContext context) => ResourceCenterPage(),
-                "/developer": (BuildContext context) => ProfileSixPage(sid),
+                }
               },
-            );
-          },
-        ));
+            ),
+            routes: <String, WidgetBuilder>{
+              "/home": (BuildContext context) => MyHomePage(),
+              // "/resources": (BuildContext context) => ResourceCenterPage(),
+              "/developer": (BuildContext context) => ProfileSixPage(sid),
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Future<SharedPreferences> _getSharedPref() async {
+    final pref = await SharedPreferences.getInstance();
+    // set sliderState if null
+    await pref.get('sliderState') ?? await pref.setBool('sliderState', true);
+    return pref;
   }
 }
