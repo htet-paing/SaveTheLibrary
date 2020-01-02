@@ -5,6 +5,7 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/pages/home/bottom_views/bottom_view_widget.dart';
+import 'package:save_the_library/pages/home/bottom_views/libraries/components/township_list.dart';
 import 'package:save_the_library/pages/home/bottom_views/libraries/libraries_view_model.dart';
 import 'package:save_the_library/widgets/error_message_widget.dart';
 import 'components/library_list.dart';
@@ -28,39 +29,60 @@ class LibrariesView extends StatefulWidget implements BottomViewWidget {
 
 @override
 class _LibrariesViewState extends State<LibrariesView> {
-  List<Widget> _widgetList = [LibraryList(), LibraryState()];
   @override
   Widget build(BuildContext context) {
     return Consumer<LibrariesViewModel>(
-      builder: (context, librariesViewModel, child) {
-        if (librariesViewModel.dataState == DataState.loaded) {
-          if (librariesViewModel.error != null) {
+      builder: (context, model, child) {
+        if (model.dataState == DataState.loaded) {
+          if (model.error != null) {
             return ErrorMessageWidget<LibrariesViewModel>(
-              error: librariesViewModel.error,
+              error: model.error,
             );
           } else {
-            return child;
+            return Scaffold(
+              body: Builder(builder: (context) {
+                if (model.currentIndex == null) {
+                  return LibraryList();
+                } else {
+                  return TownshipList(
+                      key: ValueKey(model.currentIndex),
+                      stateId: model.currentDivisionId());
+                }
+              }),
+              bottomNavigationBar: Container(
+                height: 60.0,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: model.divisionList.length,
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.only(right: 2.5, left: 2.5),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(right: 2.5, left: 2.5),
+                      child: InputChip(
+                        label: Text(
+                          model.divisionList[index].stateDivision,
+                        ),
+                        onSelected: (value) {
+                          if (model.currentIndex == index) {
+                            model.currentIndex = null;
+                          } else {
+                            model.currentIndex = index;
+                          }
+                        },
+                        pressElevation: 6,
+                        selected: model.currentIndex == index,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
           }
         } else {
           return Center(child: CircularProgressIndicator());
         }
       },
-      child: DefaultTabController(
-        length: _widgetList.length,
-        child: Scaffold(
-          appBar: TabBar(
-            indicatorColor: Theme.of(context).primaryColor,
-            tabs: [
-              Tab(icon: Icon(Icons.list)),
-              Tab(icon: Icon(Icons.place)),
-            ],
-          ),
-          body: TabBarView(
-            dragStartBehavior: DragStartBehavior.down,
-            children: _widgetList,
-          ),
-        ),
-      ),
     );
   }
 }

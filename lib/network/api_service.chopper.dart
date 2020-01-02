@@ -140,9 +140,10 @@ class _$ApiService extends ApiService {
     return client.send<BuiltRandomQuote, BuiltRandomQuote>($request);
   }
 
-  Future<Response<BuiltTownships>> getTownships(int stateId) {
+  Future<Response<BuiltTownships>> getTownships(int stateId, [int page]) {
     final $url = '/get-township/${stateId}';
-    final $request = Request('GET', $url, client.baseUrl);
+    final Map<String, dynamic> $params = {'page': page};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<BuiltTownships, BuiltTownships>($request);
   }
 

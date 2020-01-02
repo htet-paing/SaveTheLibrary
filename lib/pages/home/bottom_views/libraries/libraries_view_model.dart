@@ -5,9 +5,10 @@ import 'package:save_the_library/models/network_failure_exception.dart';
 import 'package:save_the_library/network/api_service.dart';
 
 class LibrariesViewModel extends BaseModel {
-  List<BuiltLibrary> libraryList = [];
-  void setLibraryList(List<BuiltLibrary> libraryList) {
-    this.libraryList = libraryList;
+  int _currentIndex;
+  int get currentIndex => _currentIndex;
+  set currentIndex(int currentIndex) {
+    _currentIndex = currentIndex;
     notifyListeners();
   }
 
@@ -15,6 +16,10 @@ class LibrariesViewModel extends BaseModel {
   void setDivisionList(List<BuiltDivision> divisionList) {
     this.divisionList = divisionList;
     notifyListeners();
+  }
+
+  String currentDivisionId() {
+    return this.divisionList[currentIndex].id.toString();
   }
 
   LibrariesViewModel() {
@@ -26,9 +31,6 @@ class LibrariesViewModel extends BaseModel {
     setDataState(DataState.loading);
 
     try {
-      await ApiService.fetch(() => apiService.getLibraries()).then((value) {
-        this.setLibraryList(value.body.data.toList());
-      });
       await ApiService.fetch(() => apiService.getDivisions()).then((value) {
         this.setDivisionList(value.body.states.toList());
       });

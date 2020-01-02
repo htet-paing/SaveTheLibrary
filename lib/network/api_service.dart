@@ -104,7 +104,8 @@ abstract class ApiService extends ChopperService {
 
   // Township
   @Get(path: 'get-township/{stateId}')
-  Future<Response<BuiltTownships>> getTownships(@Path() int stateId);
+  Future<Response<BuiltTownships>> getTownships(@Path() int stateId,
+      [@Query() int page]);
 
   // Video
   @Get(path: 'get-videos')
