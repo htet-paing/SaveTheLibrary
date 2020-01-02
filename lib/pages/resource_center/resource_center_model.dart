@@ -22,23 +22,13 @@ class ResourceCenterModel extends BaseModel {
   }
 
   @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
-
-    try {
-      await ApiService.fetch(() => apiService.getPdfs()).then((response) {
-        setPdfList(response.body.data.toList());
-      });
-      await ApiService.fetch(() => apiService.getPdfCategories())
-          .then((response) {
-        setPdfCategoryList(response.body.data.toList());
-      });
-    } on NoConnectionException catch (e) {
-      setError(e);
-    } finally {
-      setDataState(DataState.loaded);
-    }
-
-    setDataState(DataState.loaded);
+  Future onGet() async {
+    await ApiService.fetch(() => apiService.getPdfs()).then((response) {
+      setPdfList(response.body.data.toList());
+    });
+    await ApiService.fetch(() => apiService.getPdfCategories())
+        .then((response) {
+      setPdfCategoryList(response.body.data.toList());
+    });
   }
 }

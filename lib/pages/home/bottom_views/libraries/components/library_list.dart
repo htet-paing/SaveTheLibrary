@@ -7,6 +7,7 @@ import 'package:save_the_library/models/base_model.dart';
 import 'package:save_the_library/network/api_service.dart';
 import 'package:save_the_library/pages/home/bottom_views/libraries/components/library_list_model.dart';
 import 'package:save_the_library/pages/home/bottom_views/libraries/components/township_list_model.dart';
+import 'package:save_the_library/widgets/error_message_widget.dart';
 import 'package:save_the_library/widgets/smart_list.dart';
 
 import 'library_item.dart';
@@ -21,6 +22,9 @@ class LibraryList extends StatelessWidget {
       child: Consumer2<LibraryListModel, ApiService>(
         builder: (context, model, apiService, _) {
           if (model.dataState == DataState.loaded) {
+            if (model.hasError()) {
+              return ErrorMessageWidget<LibraryListModel>(error: model.error);
+            }
             return SmartList<BuiltLibraryList>(
               items: model.libraryList,
               onGet: (page) => ApiService.fetch(

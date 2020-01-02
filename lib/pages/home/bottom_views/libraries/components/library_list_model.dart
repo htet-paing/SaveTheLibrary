@@ -16,17 +16,9 @@ class LibraryListModel extends BaseModel {
   }
 
   @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
-
-    try {
-      await ApiService.fetch(() => apiService.getLibraries()).then((response) {
-        setLibraryList(response.body.data.toList());
-      });
-    } on NetworkFailure catch (e) {
-      setError(e);
-    } finally {
-      setDataState(DataState.loaded);
-    }
+  Future onGet() async {
+    await ApiService.fetch(() => apiService.getLibraries()).then((response) {
+      setLibraryList(response.body.data.toList());
+    });
   }
 }

@@ -16,15 +16,11 @@ class TownshipListModel extends BaseModel {
   }
 
   @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
-    try {
-      await ApiService.fetch(
-        () => apiService.getTownships(stateId).then((response) {
-          setTownshipList(response.body.townships.data.toList());
-        }),
-      );
-    } catch (e) {}
-    setDataState(DataState.loaded);
+  Future onGet() async {
+    await ApiService.fetch(
+      () => apiService.getTownships(stateId).then((response) {
+        setTownshipList(response.body.townships.data.toList());
+      }),
+    );
   }
 }

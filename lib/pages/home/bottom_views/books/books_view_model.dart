@@ -32,11 +32,9 @@ class BooksViewModel extends BaseModel {
     this.fetchData();
   }
 
-  @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
 
-    try {
+  @override
+  Future onGet() async {
       await ApiService.fetch(() => apiService.getBookAuthors()).then((value) {
         this.setBookAuthorList(value.body.data.toList());
       });
@@ -51,14 +49,7 @@ class BooksViewModel extends BaseModel {
       await ApiService.fetch(() => apiService.getBooks()).then((value) {
         this.setBookList(value.body.data.toList());
       });
-      // for testing
-      // throw NoConnectionException();
-      // throw Http404Exception();
-      // throw BadResponseException();
-    } on NoConnectionException catch (e) {
-      setError(e);
-    } finally {
-      setDataState(DataState.loaded);
-    }
   }
+
+  
 }

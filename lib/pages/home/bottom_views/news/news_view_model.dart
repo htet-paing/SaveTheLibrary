@@ -23,24 +23,13 @@ class NewsViewModel extends BaseModel {
   }
 
   @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
-
-    try {
-      await ApiService.fetch(() => apiService.getNews()).then((value) {
-        this.setNewsList(value.body.data.toList());
-      });
-      await ApiService.fetch(() => apiService.getVideos()).then((value) {
-        this.setVideoList(value.body.data.toList());
-      });
-      // throw NoConnectionException();
-      // throw Http404Exception();
-      // throw BadResponseException();
-    } on NoConnectionException catch (e) {
-      setError(e);
-    } finally {
-      setDataState(DataState.loaded);
-    }
+  Future onGet() async {
+    await ApiService.fetch(() => apiService.getNews()).then((value) {
+      this.setNewsList(value.body.data.toList());
+    });
+    await ApiService.fetch(() => apiService.getVideos()).then((value) {
+      this.setVideoList(value.body.data.toList());
+    });
   }
 
   bool hasError() {

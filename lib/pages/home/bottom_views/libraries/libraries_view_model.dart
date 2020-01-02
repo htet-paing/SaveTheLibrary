@@ -27,20 +27,9 @@ class LibrariesViewModel extends BaseModel {
   }
 
   @override
-  Future fetchData() async {
-    setDataState(DataState.loading);
-
-    try {
-      await ApiService.fetch(() => apiService.getDivisions()).then((value) {
-        this.setDivisionList(value.body.states.toList());
-      });
-      // throw NoConnectionException();
-      // throw Http404Exception();
-      // throw BadResponseException();
-    } on NoConnectionException catch (e) {
-      setError(e);
-    } finally {
-      setDataState(DataState.loaded);
-    }
+  Future onGet() async {
+    await ApiService.fetch(() => apiService.getDivisions()).then((value) {
+      this.setDivisionList(value.body.states.toList());
+    });
   }
 }
