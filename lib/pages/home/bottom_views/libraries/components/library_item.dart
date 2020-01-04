@@ -10,54 +10,51 @@ class LibraryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LibraryDetailPage(
-              libraryId: library.id,
-            ),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          leading: CachedNetworkImage(
+            width: 100.0,
+            height: 56.0,
+            imageUrl:
+                'https://savethelibrarymyanmar.org/images/${library.image}',
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
           ),
-        ),
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0),
-        child: Card(
-          elevation: 5.0,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 140.0,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://savethelibrarymyanmar.org/images/${library.image}',
-                  fit: BoxFit.cover,
-                  width: 1000.0,
-                ),
-              ),
-              // Shown library name on Library List Page
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Text(
-                  library.name,
-                  style: TextStyle(fontFamily: 'Pyidaungsu', fontSize: 15.0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 5.0),
-                child: Text(
-                  library.townshipName,
-                  style: TextStyle(
-                      fontFamily: 'Pyidaungsu',
-                      fontSize: 15.0,
-                      color: Colors.black38),
-                ),
-              ),
+          title: Text(
+            library.name,
+            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+            // style: TextStyle(fontSize: 14),
+          ),
+          isThreeLine: true,
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('${library.townshipName}'),
+              Text('${library.villageTractName}'),
             ],
           ),
+          trailing: IconButton(
+            icon: Icon(Icons.bookmark_border),
+            onPressed: () {
+              //TODO: link with HIVE
+            },
+            tooltip: 'save library',
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LibraryDetailPage(
+                  libraryId: library.id,
+                ),
+              ),
+            );
+          },
         ),
-      ),
+        Divider()
+      ],
     );
   }
 }

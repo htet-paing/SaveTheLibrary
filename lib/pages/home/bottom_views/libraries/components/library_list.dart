@@ -25,18 +25,22 @@ class LibraryList extends StatelessWidget {
             if (model.hasError()) {
               return ErrorMessageWidget<LibraryListModel>(error: model.error);
             }
-            return SmartList<BuiltLibraryList>(
-              items: model.libraryList,
-              onGet: (page) => ApiService.fetch(
-                () => apiService.getLibraries(page),
-              ),
-              onLoaded: (body) {
-                model.setLibraryList(
-                  model.libraryList + body.data.toList(),
-                );
-              },
-              itemBuilder: (context, item) => LibraryItem(
-                library: item as BuiltLibrary,
+            return Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: SmartList<BuiltLibraryList>(
+                enablePullDown: true,
+                items: model.libraryList,
+                onGet: (page) => ApiService.fetch(
+                  () => apiService.getLibraries(page),
+                ),
+                onLoaded: (body) {
+                  model.setLibraryList(
+                    model.libraryList + body.data.toList(),
+                  );
+                },
+                itemBuilder: (context, item) => LibraryItem(
+                  library: item as BuiltLibrary,
+                ),
               ),
             );
           } else {
