@@ -6,6 +6,7 @@ import 'package:save_the_library/models/api/video/built_video_list.dart';
 import 'package:save_the_library/network/api_service.dart';
 
 class NewsViewModel extends BaseModel {
+
   List<BuiltNews> newsList = [];
   void setNewsList(List<BuiltNews> newsList) {
     this.newsList = newsList;
